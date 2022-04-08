@@ -155,7 +155,7 @@ void Database::loadFromFile(std::string)
 
     if (!file)
     {
-        "File was not opened properly \n Program will be closed";
+        std::cout << "File was not opened properly \n Program will be closed" << std::endl;
         exit(0);
     }
 
@@ -213,7 +213,7 @@ void Database::saveToFile(std::string)
 
     if (!file)
     {
-        "File was not opened properly\nProgram will be closed";
+        std::cout << "File was not opened properly \n Program will be closed" << std::endl;
         exit(0);
     }
 
