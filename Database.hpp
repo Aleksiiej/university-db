@@ -5,33 +5,12 @@
 #include <memory>
 #include <numeric>
 #include <fstream>
-
-class Student
-{
-    friend class Database;
-
-public:
-    Student() = default;
-    Student(const std::string &name, const std::string &surname, const std::string &adress, const int &index, const std::string &PESEL, const std::string &sex)
-        : name_(name), surname_(surname), adress_(adress), index_(index), PESEL_(PESEL), sex_(sex)
-    {
-    }
-
-private:
-    std::string name_;
-    std::string surname_;
-    std::string adress_;
-    int index_;
-    std::string PESEL_;
-    std::string sex_;
-};
+#include "Student.hpp"
 
 class Database
 {
 public:
     Database() = default;
-
-    ~Database();
 
     void addStudent(const std::string name, const std::string surname, const std::string adress, const int index, const std::string PESEL, const std::string sex); // adds record
     void show() const;                                                                                                                                             // shows all records
@@ -44,10 +23,12 @@ public:
     void sortByPESEL();                                                                                                                                            // sort records by PESEL
     void remove(int index);                                                                                                                                        // removes record with given index
     bool validatePESEL(std::string PESEL) const;                                                                                                                   // validates given PESEL
-    void loadFromFile(std::string);                                                                                                                                // load records from .txt file to vector database_
-    void saveToFile(std::string);                                                                                                                                  // overwrites .txt file with records from vector database_
+    void loadFromFile();                                                                                                                                           // load records from .txt file to vector database_
+    void saveToFile();                                                                                                                                             // overwrites .txt file with records from vector database_
+
+    Student getStudentRecord(int pos); // returns copy of record pointed by positiion in database - for testing
 
 private:
     std::vector<Student> database_;
-    std::string fileName_ = "database.txt";
+    std::string fileName_{"../database.txt"};
 };

@@ -1,15 +1,8 @@
 #include "Database.hpp"
 
-Database::~Database()
-{
-    saveToFile(fileName_);
-}
-
 void Database::addStudent(const std::string name, const std::string surname, const std::string adress, const int index, const std::string PESEL, const std::string sex)
 {
     database_.push_back(Student(name, surname, adress, index, PESEL, sex));
-    std::cout << "In record of " << name << " " << surname << " ";
-    validatePESEL(PESEL);
     std::cout << std::endl;
 }
 
@@ -147,7 +140,7 @@ bool Database::validatePESEL(std::string PESEL) const
     }
 }
 
-void Database::loadFromFile(std::string)
+void Database::loadFromFile()
 {
     database_.clear();
 
@@ -207,9 +200,9 @@ void Database::loadFromFile(std::string)
     }
 }
 
-void Database::saveToFile(std::string)
+void Database::saveToFile()
 {
-    std::fstream file(fileName_, std::ios::out | std::ios::trunc);
+    std::fstream file(fileName_, std::ios::out);
 
     if (!file)
     {
@@ -219,6 +212,7 @@ void Database::saveToFile(std::string)
 
     for (auto It = begin(database_); It != end(database_); It++)
     {
+        std::cout << "Hello" << std::endl;
         file << It->name_ << std::endl;
         file << It->surname_ << std::endl;
         file << It->adress_ << std::endl;
@@ -230,4 +224,9 @@ void Database::saveToFile(std::string)
             file << std::endl;
         }
     }
+}
+
+Student Database::getStudentRecord(int pos)
+{
+    return database_.at(pos);
 }

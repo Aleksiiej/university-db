@@ -15,10 +15,12 @@ FetchContent_MakeAvailable(googletest)
 set(SRC_LIST
     main.cpp
     Database.cpp
+    Student.cpp
 )
 
 set(SRC_LIST_UT
     Database.cpp
+    Student.cpp
 )
 
 add_executable(${PROJECT_NAME} ${SRC_LIST})
