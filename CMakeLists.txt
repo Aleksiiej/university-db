@@ -17,12 +17,14 @@ set(SRC_LIST
     Database.cpp
     Person.cpp
     Student.cpp
+    Employee.cpp
 )
 
 set(SRC_LIST_UT
     Database.cpp
     Person.cpp
     Student.cpp
+    Employee.cpp
 )
 
 add_executable(${PROJECT_NAME} ${SRC_LIST})

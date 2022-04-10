@@ -1,7 +1,6 @@
 #pragma once
 #include "Person.hpp"
 
-
 class Student : public Person
 {
     friend class Database;
@@ -9,8 +8,7 @@ class Student : public Person
 public:
     Student() = default;
     Student(const std::string &name, const std::string &surname, const std::string &adress, const int &index, const std::string &PESEL, const Sex &sex)
-        : Person(name, surname, adress, PESEL, sex)
-        , index_(index)
+        : Person(name, surname, adress, PESEL, sex), index_(index)
     {
     }
 

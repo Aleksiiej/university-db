@@ -1,3 +1,6 @@
 #folders
 .vscode/
 .build/
+
+#files
+database.txt
