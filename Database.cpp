@@ -1,23 +1,23 @@
 #include "Database.hpp"
 
-void Database::addStudent(const std::string name, const std::string surname, const std::string adress, const int index, const std::string PESEL, const std::string sex)
+void Database::addStudent(const std::string name, const std::string surname, const std::string adress, const int index, const std::string PESEL, const Sex sex)
 {
     database_.push_back(Student(name, surname, adress, index, PESEL, sex));
     std::cout << std::endl;
 }
 
-void Database::show() const
+void Database::show()
 {
     system("clear");
     std::for_each(begin(database_), end(database_),
-                  [](const auto &record)
+                  [this](auto &record)
                   { std::cout<<"==================================="<<std::endl;
       std::cout<<"Name: " << record.name_<<std::endl;
       std::cout<<"Surname: " << record.surname_<<std::endl;
       std::cout<<"Adress: " << record.adress_<<std::endl;
       std::cout<<"Index: " << record.index_<<std::endl;
       std::cout<<"PESEL: " << record.PESEL_<<std::endl;
-      std::cout<<"Sex: " << record.sex_<<std::endl;
+      std::cout<<"Sex: " << record.sexPrint[record.sex_]<<std::endl;
       std::cout<<"==================================="<<std::endl; });
 }
 
@@ -29,7 +29,7 @@ void Database::printByPtr(Student *ptr) const
     std::cout << "Adress: " << ptr->adress_ << std::endl;
     std::cout << "Index: " << ptr->index_ << std::endl;
     std::cout << "PESEL: " << ptr->PESEL_ << std::endl;
-    std::cout << "Sex: " << ptr->sex_ << std::endl;
+    std::cout << "Sex: " << ptr->sexPrint[ptr->sex_] << std::endl;
     std::cout << "===================================" << std::endl;
 }
 
@@ -158,7 +158,8 @@ void Database::loadFromFile()
     int tempIndex;
     std::string stringTempIndex;
     std::string tempPESEL;
-    std::string tempSex;
+    std::string tempSexString;
+    Sex tempSex;
 
     int counter = 1;
 
@@ -192,7 +193,8 @@ void Database::loadFromFile()
         }
         if (counter % 6 == 0)
         {
-            std::getline(file, tempSex);
+            std::getline(file, tempSexString);
+            tempSex = static_cast<Sex>(stoi(tempSexString));
             counter++;
         }
 
@@ -218,7 +220,7 @@ void Database::saveToFile()
         file << It->adress_ << std::endl;
         file << It->index_ << std::endl;
         file << It->PESEL_ << std::endl;
-        file << It->sex_;
+        file << static_cast<int>(It->sex_);
         if (It != (end(database_) - 1))
         {
             file << std::endl;

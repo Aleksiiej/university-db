@@ -1,29 +1,26 @@
 #pragma once
-#include <string>
+#include "Person.hpp"
 
-class Student
+
+class Student : public Person
 {
     friend class Database;
 
 public:
     Student() = default;
-    Student(const std::string &name, const std::string &surname, const std::string &adress, const int &index, const std::string &PESEL, const std::string &sex)
-        : name_(name), surname_(surname), adress_(adress), index_(index), PESEL_(PESEL), sex_(sex)
+    Student(const std::string &name, const std::string &surname, const std::string &adress, const int &index, const std::string &PESEL, const Sex &sex)
+        : Person(name, surname, adress, PESEL, sex)
+        , index_(index)
     {
     }
 
-    std::string getName();
-    std::string getSurname();
-    std::string getAdress();
+    std::string getName() override;
+    std::string getSurname() override;
+    std::string getAdress() override;
     int getIndex();
-    std::string getPESEL();
-    std::string getSex();
+    std::string getPESEL() override;
+    Sex getSex() override;
 
 private:
-    std::string name_;
-    std::string surname_;
-    std::string adress_;
     int index_;
-    std::string PESEL_;
-    std::string sex_;
 };

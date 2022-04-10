@@ -1,5 +1,6 @@
 #include <gtest/gtest.h>
 #include "../Database.hpp"
+#include "../Person.hpp"
 #include "../Student.hpp"
 
 class DatabaseFixture : public ::testing::Test
@@ -7,9 +8,9 @@ class DatabaseFixture : public ::testing::Test
 protected:
     void SetUp()
     {
-        database.addStudent("Jan", "Nowak", "Gniezno, Jemiolowa 16", 217025, "93121312345", "male");
-        database.addStudent("Aleksandra", "Nowakowska", "Bydgoszcz, Zwyczajna 5", 126574, "93040523495", "female");
-        database.addStudent("Piotr", "Kowalski", "Warszawa, Przykladowa 20", 223412, "89275430298", "male");
+        database.addStudent("Jan", "Nowak", "Gniezno, Jemiolowa 16", 217025, "93121312345", Sex::male);
+        database.addStudent("Aleksandra", "Nowakowska", "Bydgoszcz, Zwyczajna 5", 126574, "93040523495", Sex::female);
+        database.addStudent("Piotr", "Kowalski", "Warszawa, Przykladowa 20", 223412, "89275430298", Sex::male);
     }
 
     Database database;
@@ -18,7 +19,7 @@ protected:
     std::string testAdress{"Bydgoszcz, Zwyczajna 5"};
     int testIndex{126574};
     std::string testPESEL{"93040523495"};
-    std::string testSex{"female"};
+    Sex testSex{Sex::female};
 };
 
 TEST_F(DatabaseFixture, addStudentTest)

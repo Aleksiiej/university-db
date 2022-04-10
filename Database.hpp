@@ -5,6 +5,7 @@
 #include <memory>
 #include <numeric>
 #include <fstream>
+#include "Person.hpp"
 #include "Student.hpp"
 
 class Database
@@ -12,8 +13,8 @@ class Database
 public:
     Database() = default;
 
-    void addStudent(const std::string name, const std::string surname, const std::string adress, const int index, const std::string PESEL, const std::string sex); // adds record
-    void show() const;                                                                                                                                             // shows all records
+    void addStudent(const std::string name, const std::string surname, const std::string adress, const int index, const std::string PESEL, const Sex sex); // adds record
+    void show();                                                                                                                                             // shows all records
     void printByPtr(Student *ptr) const;                                                                                                                           // print sigle records using given pointer
     void showBySurname(const std::string surname);                                                                                                                 // shows records with given surname
     void showByPESEL(const std::string PESEL);                                                                                                                     // shows record with given PESEL
