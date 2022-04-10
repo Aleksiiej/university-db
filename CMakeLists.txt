@@ -15,11 +15,13 @@ FetchContent_MakeAvailable(googletest)
 set(SRC_LIST
     main.cpp
     Database.cpp
+    Person.cpp
     Student.cpp
 )
 
 set(SRC_LIST_UT
     Database.cpp
+    Person.cpp
     Student.cpp
 )
 
