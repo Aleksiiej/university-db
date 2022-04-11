@@ -6,28 +6,48 @@ void Database::addStudent(const std::string name, const std::string surname, con
     std::cout << std::endl;
 }
 
+void Database::addEmployee(const std::string name, const std::string surname, const std::string adress, const float salary, const std::string PESEL, const Sex sex)
+{
+    database_.push_back(Employee(name, surname, adress, salary, PESEL, sex));
+    std::cout << std::endl;
+}
+
 void Database::show()
 {
     system("clear");
     std::for_each(begin(database_), end(database_),
                   [this](auto &record)
                   { std::cout<<"==================================="<<std::endl;
-      std::cout<<"Name: " << record.name_<<std::endl;
-      std::cout<<"Surname: " << record.surname_<<std::endl;
-      std::cout<<"Adress: " << record.adress_<<std::endl;
-      std::cout<<"Index: " << record.index_<<std::endl;
-      std::cout<<"PESEL: " << record.PESEL_<<std::endl;
-      std::cout<<"Sex: " << record.sexPrint[record.sex_]<<std::endl;
-      std::cout<<"==================================="<<std::endl; });
+      std::cout<<"Name: " << record.getName() << std::endl;
+      std::cout<<"Surname: " << record.getSurname() << std::endl;
+      std::cout<<"Adress: " << record.getAdress() << std::endl;
+      if(record.classId == 1)
+      {
+          std::cout<<"Index: " << record.getIndex()<<std::endl;
+      }
+      else if (record.classId == 2)
+      {
+          std::cout<<"Salary: " << record.getSalary()<<std::endl;
+      }
+      std::cout<<"PESEL: " << record.getPESEL() << std::endl;
+      std::cout<<"Sex: " << record.sexPrint[record.sex_] << std::endl;
+      std::cout<<"===================================" << std::endl; });
 }
 
-void Database::printByPtr(Student *ptr) const
+void Database::printByPtr(Person *ptr) const
 {
     std::cout << "===================================" << std::endl;
-    std::cout << "Name: " << ptr->name_ << std::endl;
-    std::cout << "Surname: " << ptr->surname_ << std::endl;
-    std::cout << "Adress: " << ptr->adress_ << std::endl;
-    std::cout << "Index: " << ptr->index_ << std::endl;
+    std::cout << "Name: " << ptr->getName() << std::endl;
+    std::cout << "Surname: " << ptr->getSurname() << std::endl;
+    std::cout << "Adress: " << ptr->getAdress() << std::endl;
+    if (ptr->classId == 2)
+    {
+        std::cout << "Index: " << ptr->getIndex() << std::endl;
+    }
+    else if (ptr->classId == 2)
+    {
+        std::cout << "Salary: " << ptr->getSalary() << std::endl;
+    }
     std::cout << "PESEL: " << ptr->PESEL_ << std::endl;
     std::cout << "Sex: " << ptr->sexPrint[ptr->sex_] << std::endl;
     std::cout << "===================================" << std::endl;
@@ -49,25 +69,34 @@ void Database::showByPESEL(const std::string PESEL)
     printByPtr(ptr);
 }
 
-std::vector<Student *> Database::findBySurname(std::string surname)
+std::vector<Person *> Database::findBySurname(std::string surname)
 {
-    std::vector<Student *> tempVec;
+    std::vector<Person *> tempVec;
     for (auto &el : database_)
     {
         if (el.surname_ == surname)
         {
-            Student *temp_ptr = &el;
+            Person *temp_ptr = &el;
             tempVec.push_back(temp_ptr);
         }
     }
     return tempVec;
 }
 
-Student *Database::findByPESEL(std::string PESEL)
+Person *Database::findByPESEL(std::string PESEL)
 {
+    // Person* tempPtr;
+    // for(auto el : database_)
+    // {
+    //     if(el.PESEL_ == PESEL)
+    //     {
+    //         tempPtr = &el;
+    //         return tempPtr;
+    //     }
+    // }
     auto Iter = std::find_if(begin(database_), end(database_), [&PESEL](auto el)
-                             { return el.PESEL_ == PESEL; });
-    Student *ptr = &(*Iter);
+                             { return el.getPESEL() == PESEL; });
+    Person *ptr = &(*Iter);
     return ptr;
 }
 
@@ -85,8 +114,8 @@ void Database::sortByPESEL()
 
 void Database::remove(int index)
 {
-    database_.erase(std::find_if(begin(database_), end(database_), [&index](auto el)
-                                 { return el.index_ == index; }));
+    database_.erase(std::find_if(begin(database_), end(database_), [&index](auto &el)
+                                 { return el.getIndex() == index; }));
 }
 
 bool Database::validatePESEL(std::string PESEL) const
@@ -218,7 +247,14 @@ void Database::saveToFile()
         file << It->name_ << std::endl;
         file << It->surname_ << std::endl;
         file << It->adress_ << std::endl;
-        file << It->index_ << std::endl;
+        if (It->classId == 1)
+        {
+            file << It->getIndex() << std::endl;
+        }
+        else if (It->classId == 2)
+        {
+            file << It->getSalary() << std::endl;
+        }
         file << It->PESEL_ << std::endl;
         file << static_cast<int>(It->sex_);
         if (It != (end(database_) - 1))
@@ -228,7 +264,12 @@ void Database::saveToFile()
     }
 }
 
-Student Database::getStudentRecord(int pos)
+Person *Database::getStudentRecord(int pos)
 {
-    return database_.at(pos);
+    return &(database_.at(pos));
+}
+
+Person *Database::getEmployeeRecord(int pos)
+{
+    return &(database_.at(pos));
 }

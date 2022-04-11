@@ -19,6 +19,8 @@ public:
     std::string getPESEL() override;
     Sex getSex() override;
 
+    int classId{2};
+
 private:
     float salary_;
 };
