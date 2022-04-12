@@ -53,7 +53,7 @@ TEST_F(DatabaseFixture, addEmployeeTest)
 
 TEST_F(DatabaseFixture, findBySurnameTest)
 {
-    std::vector<Person *> tempVec = database.findBySurname("Nowakowska");
+    std::vector<std::shared_ptr<Person>> tempVec = database.findBySurname("Nowakowska");
 
     EXPECT_EQ(testStudentName, tempVec.at(0)->getName());
     EXPECT_EQ(testStudentSurname, tempVec.at(0)->getSurname());
@@ -65,7 +65,7 @@ TEST_F(DatabaseFixture, findBySurnameTest)
 
 TEST_F(DatabaseFixture, findByPESELTest)
 {
-    Person *tempPtr = database.findByPESEL("93040523495");
+    std::shared_ptr<Person> tempPtr = database.findByPESEL("93040523495");
 
     EXPECT_EQ(testStudentName, tempPtr->getName());
     EXPECT_EQ(testStudentSurname, tempPtr->getSurname());

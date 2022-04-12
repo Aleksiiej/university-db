@@ -6,8 +6,7 @@ class Employee : public Person
     friend class Database;
 
 public:
-    Employee() = default;
-    Employee(const std::string &name, const std::string &surname, const std::string &adress, const float &salary, const std::string &PESEL, const Sex &sex)
+    Employee(std::string name, std::string surname, std::string adress, float salary, std::string PESEL, Sex sex)
         : Person(name, surname, adress, PESEL, sex), salary_(salary)
     {
     }

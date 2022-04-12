@@ -1,40 +1,28 @@
 #include "Database.hpp"
 
-void Database::addStudent(const std::string name, const std::string surname, const std::string adress, const int index, const std::string PESEL, const Sex sex)
+void Database::addStudent(std::string name, std::string surname, std::string adress, int index, std::string PESEL, Sex sex)
 {
-    database_.push_back(Student(name, surname, adress, index, PESEL, sex));
+    database_.push_back(std::make_shared<Person>(Student{name, surname, adress, index, PESEL, sex}));
     std::cout << std::endl;
 }
 
-void Database::addEmployee(const std::string name, const std::string surname, const std::string adress, const float salary, const std::string PESEL, const Sex sex)
+void Database::addEmployee(std::string name, std::string surname, std::string adress, float salary, std::string PESEL, Sex sex)
 {
-    database_.push_back(Employee(name, surname, adress, salary, PESEL, sex));
+    database_.push_back(std::make_shared<Person>(Employee{name, surname, adress, salary, PESEL, sex}));
     std::cout << std::endl;
 }
 
 void Database::show()
 {
     system("clear");
-    std::for_each(begin(database_), end(database_),
-                  [this](auto &record)
-                  { std::cout<<"==================================="<<std::endl;
-      std::cout<<"Name: " << record.getName() << std::endl;
-      std::cout<<"Surname: " << record.getSurname() << std::endl;
-      std::cout<<"Adress: " << record.getAdress() << std::endl;
-      if(record.classId == 1)
-      {
-          std::cout<<"Index: " << record.getIndex()<<std::endl;
-      }
-      else if (record.classId == 2)
-      {
-          std::cout<<"Salary: " << record.getSalary()<<std::endl;
-      }
-      std::cout<<"PESEL: " << record.getPESEL() << std::endl;
-      std::cout<<"Sex: " << record.sexPrint[record.sex_] << std::endl;
-      std::cout<<"===================================" << std::endl; });
+
+    for(auto ptr : database_)
+    {
+        printByPtr(ptr);
+    }
 }
 
-void Database::printByPtr(Person *ptr) const
+void Database::printByPtr(std::shared_ptr<Person> ptr) const
 {
     std::cout << "===================================" << std::endl;
     std::cout << "Name: " << ptr->getName() << std::endl;
@@ -53,14 +41,14 @@ void Database::printByPtr(Person *ptr) const
     std::cout << "===================================" << std::endl;
 }
 
-void Database::showBySurname(const std::string surname)
-{
-    system("clear");
-    auto tempVec = findBySurname(surname);
+// void Database::showBySurname(const std::string surname)
+// {
+//     system("clear");
+//     auto tempVec = findBySurname(surname);
 
-    std::for_each(begin(tempVec), end(tempVec), [this](const auto &ptr)
-                  { printByPtr(ptr); });
-}
+//     std::for_each(begin(tempVec), end(tempVec), [this](const auto &ptr)
+//                   { printByPtr(ptr); });
+// }
 
 void Database::showByPESEL(const std::string PESEL)
 {
@@ -69,53 +57,44 @@ void Database::showByPESEL(const std::string PESEL)
     printByPtr(ptr);
 }
 
-std::vector<Person *> Database::findBySurname(std::string surname)
+std::vector<std::shared_ptr<Person>> Database::findBySurname(std::string surname)
 {
-    std::vector<Person *> tempVec;
-    for (auto &el : database_)
+    std::vector<std::shared_ptr<Person>> tempVec;
+    for (auto el : database_)
     {
-        if (el.surname_ == surname)
+        if (el->surname_ == surname)
         {
-            Person *temp_ptr = &el;
-            tempVec.push_back(temp_ptr);
+            std::shared_ptr<Person> tempPtr = el;
+            tempVec.push_back(tempPtr);
         }
     }
     return tempVec;
 }
 
-Person *Database::findByPESEL(std::string PESEL)
+std::shared_ptr<Person> Database::findByPESEL(std::string PESEL)
 {
-    // Person* tempPtr;
-    // for(auto el : database_)
-    // {
-    //     if(el.PESEL_ == PESEL)
-    //     {
-    //         tempPtr = &el;
-    //         return tempPtr;
-    //     }
-    // }
     auto Iter = std::find_if(begin(database_), end(database_), [&PESEL](auto el)
-                             { return el.getPESEL() == PESEL; });
-    Person *ptr = &(*Iter);
-    return ptr;
+                             { return el->getPESEL() == PESEL; });
+    std::shared_ptr<Person> tempPtr = *Iter;
+    return tempPtr;
 }
 
 void Database::sortBySurname()
 {
     std::sort(begin(database_), end(database_), [](auto a, auto b)
-              { return a.surname_ < b.surname_; });
+              { return a->surname_ < b->surname_; });
 }
 
 void Database::sortByPESEL()
 {
     std::sort(begin(database_), end(database_), [](auto a, auto b)
-              { return a.PESEL_ < b.PESEL_; });
+              { return a->PESEL_ < b->PESEL_; });
 }
 
 void Database::remove(int index)
 {
     database_.erase(std::find_if(begin(database_), end(database_), [&index](auto &el)
-                                 { return el.getIndex() == index; }));
+                                 { return el->getIndex() == index; }));
 }
 
 bool Database::validatePESEL(std::string PESEL) const
@@ -227,7 +206,7 @@ void Database::loadFromFile()
             counter++;
         }
 
-        database_.push_back(Student{tempName, tempSurname, tempAdress, tempIndex, tempPESEL, tempSex});
+        database_.push_back(std::make_shared<Person>(Student{tempName, tempSurname, tempAdress, tempIndex, tempPESEL, tempSex}));
     }
 }
 
@@ -241,35 +220,28 @@ void Database::saveToFile()
         exit(0);
     }
 
-    for (auto It = begin(database_); It != end(database_); It++)
+    for (auto ptr : database_)
     {
         std::cout << "Hello" << std::endl;
-        file << It->name_ << std::endl;
-        file << It->surname_ << std::endl;
-        file << It->adress_ << std::endl;
-        if (It->classId == 1)
+        file << ptr->getName() << std::endl;
+        file << ptr->getSurname() << std::endl;
+        file << ptr->getAdress() << std::endl;
+        if (ptr->classId == 1)
         {
-            file << It->getIndex() << std::endl;
+            file << ptr->getIndex() << std::endl;
         }
-        else if (It->classId == 2)
+        else if (ptr->classId == 2)
         {
-            file << It->getSalary() << std::endl;
+            file << ptr->getSalary() << std::endl;
         }
-        file << It->PESEL_ << std::endl;
-        file << static_cast<int>(It->sex_);
-        if (It != (end(database_) - 1))
-        {
-            file << std::endl;
-        }
+        file << ptr->getPESEL() << std::endl;
+        file << static_cast<int>(ptr->sex_);
     }
+    file << std::endl;
 }
 
-Person *Database::getStudentRecord(int pos)
+std::shared_ptr<Person> Database::getStudentRecord(int pos)
 {
-    return &(database_.at(pos));
-}
-
-Person *Database::getEmployeeRecord(int pos)
-{
-    return &(database_.at(pos));
+    std::shared_ptr<Person> tempPtr = database_.at(pos);
+    return tempPtr;
 }

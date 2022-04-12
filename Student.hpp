@@ -6,8 +6,7 @@ class Student : public Person
     friend class Database;
 
 public:
-    Student() = default;
-    Student(const std::string &name, const std::string &surname, const std::string &adress, const int &index, const std::string &PESEL, const Sex &sex)
+    Student(std::string name, std::string surname, std::string adress, int index, std::string PESEL, Sex sex)
         : Person(name, surname, adress, PESEL, sex), index_(index)
     {
     }
