@@ -36,8 +36,8 @@ void Database::printByPtr(std::shared_ptr<Person> ptr) const
     {
         std::cout << "Salary: " << ptr->getSalary() << std::endl;
     }
-    std::cout << "PESEL: " << ptr->PESEL_ << std::endl;
-    std::cout << "Sex: " << ptr->sexPrint[ptr->sex_] << std::endl;
+    std::cout << "PESEL: " << ptr->getPESEL() << std::endl;
+    std::cout << "Sex: " << ptr->sexPrint[ptr->getSex()] << std::endl;
     std::cout << "===================================" << std::endl;
 }
 
@@ -62,7 +62,7 @@ std::vector<std::shared_ptr<Person>> Database::findBySurname(std::string surname
     std::vector<std::shared_ptr<Person>> tempVec;
     for (auto el : database_)
     {
-        if (el->surname_ == surname)
+        if (el->getSurname() == surname)
         {
             std::shared_ptr<Person> tempPtr = el;
             tempVec.push_back(tempPtr);
@@ -82,13 +82,13 @@ std::shared_ptr<Person> Database::findByPESEL(std::string PESEL)
 void Database::sortBySurname()
 {
     std::sort(begin(database_), end(database_), [](auto a, auto b)
-              { return a->surname_ < b->surname_; });
+              { return a->getSurname() < b->getSurname(); });
 }
 
 void Database::sortByPESEL()
 {
     std::sort(begin(database_), end(database_), [](auto a, auto b)
-              { return a->PESEL_ < b->PESEL_; });
+              { return a->getPESEL() < b->getPESEL(); });
 }
 
 void Database::remove(int index)
@@ -235,7 +235,7 @@ void Database::saveToFile()
             file << ptr->getSalary() << std::endl;
         }
         file << ptr->getPESEL() << std::endl;
-        file << static_cast<int>(ptr->sex_);
+        file << static_cast<int>(ptr->getSex());
     }
     file << std::endl;
 }

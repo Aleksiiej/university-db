@@ -10,23 +10,32 @@ enum class Sex
 
 class Person
 {
-    friend class Database;
-
 public:
-    Person(std::string name, std::string surname, std::string adress, std::string PESEL, Sex sex)
+    Person(const std::string &name, const std::string &surname, const std::string &adress, const std::string &PESEL, const Sex &sex)
         : name_(name), surname_(surname), adress_(adress), PESEL_(PESEL), sex_(sex)
     {
     }
 
-    virtual std::string getName();
-    virtual std::string getSurname();
-    virtual std::string getAdress();
-    virtual int getIndex() { return -1; }
-    virtual float getSalary() { return -1; }
-    virtual std::string getPESEL();
-    virtual Sex getSex();
+    // getters
+    virtual std::string getName() const;
+    virtual std::string getSurname() const;
+    virtual std::string getAdress() const;
+    virtual int getIndex() const;
+    virtual float getSalary() const;
+    virtual std::string getPESEL() const;
+    virtual Sex getSex() const;
+
+    // setters
+    virtual void setName(const std::string &name);
+    virtual void setSurname(const std::string &surname);
+    virtual void setAdress(const std::string &adress);
+    virtual void setIndex(const int &);
+    virtual void setSalary(const float &);
+    virtual void setPESEL(const std::string &PESEL);
+    virtual void setSex(const Sex &sex);
 
     int classId;
+    std::map<Sex, std::string> sexPrint{{Sex::male, "male"}, {Sex::female, "female"}};
 
 protected:
     std::string name_;
@@ -34,6 +43,4 @@ protected:
     std::string adress_;
     std::string PESEL_;
     Sex sex_;
-
-    std::map<Sex, std::string> sexPrint{{Sex::male, "male"}, {Sex::female, "female"}};
 };
