@@ -1,14 +1,14 @@
 #include "Database.hpp"
 
-void Database::addStudent(std::string name, std::string surname, std::string adress, int index, std::string PESEL, Sex sex)
+void Database::addStudent(std::string name, std::string surname, std::string adress, int index, std::string PESEL, Sex sex, Position position)
 {
-    database_.push_back(std::make_shared<Person>(Student{name, surname, adress, index, PESEL, sex}));
+    database_.push_back(std::make_shared<Student>(Student{name, surname, adress, index, PESEL, sex, position}));
     std::cout << std::endl;
 }
 
-void Database::addEmployee(std::string name, std::string surname, std::string adress, float salary, std::string PESEL, Sex sex)
+void Database::addEmployee(std::string name, std::string surname, std::string adress, float salary, std::string PESEL, Sex sex, Position position)
 {
-    database_.push_back(std::make_shared<Person>(Employee{name, surname, adress, salary, PESEL, sex}));
+    database_.push_back(std::make_shared<Employee>(Employee{name, surname, adress, salary, PESEL, sex, position}));
     std::cout << std::endl;
 }
 
@@ -16,7 +16,7 @@ void Database::show()
 {
     system("clear");
 
-    for(auto ptr : database_)
+    for (auto ptr : database_)
     {
         printByPtr(ptr);
     }
@@ -28,11 +28,12 @@ void Database::printByPtr(std::shared_ptr<Person> ptr) const
     std::cout << "Name: " << ptr->getName() << std::endl;
     std::cout << "Surname: " << ptr->getSurname() << std::endl;
     std::cout << "Adress: " << ptr->getAdress() << std::endl;
-    if (ptr->classId == 2)
+    std::cout << "Position: " << ptr->positionPrint[ptr->getPosition()] << std::endl;
+    if (ptr->getPosition() == Position::Student)
     {
         std::cout << "Index: " << ptr->getIndex() << std::endl;
     }
-    else if (ptr->classId == 2)
+    else if (ptr->getPosition() == Position::Employee)
     {
         std::cout << "Salary: " << ptr->getSalary() << std::endl;
     }
@@ -41,14 +42,14 @@ void Database::printByPtr(std::shared_ptr<Person> ptr) const
     std::cout << "===================================" << std::endl;
 }
 
-// void Database::showBySurname(const std::string surname)
-// {
-//     system("clear");
-//     auto tempVec = findBySurname(surname);
+void Database::showBySurname(const std::string surname)
+{
+    system("clear");
+    auto tempVec = findBySurname(surname);
 
-//     std::for_each(begin(tempVec), end(tempVec), [this](const auto &ptr)
-//                   { printByPtr(ptr); });
-// }
+    std::for_each(begin(tempVec), end(tempVec), [this](const auto &ptr)
+                  { printByPtr(ptr); });
+}
 
 void Database::showByPESEL(const std::string PESEL)
 {
@@ -163,8 +164,12 @@ void Database::loadFromFile()
     std::string tempName;
     std::string tempSurname;
     std::string tempAdress;
-    int tempIndex;
+    std::string tempPositionString;
+    Position tempPosition;
     std::string stringTempIndex;
+    int tempIndex;
+    std::string stringTempSalary;
+    float tempSalary;
     std::string tempPESEL;
     std::string tempSexString;
     Sex tempSex;
@@ -173,40 +178,60 @@ void Database::loadFromFile()
 
     while (!file.eof())
     {
-        if (counter % 6 == 1)
+        if (counter % 7 == 1)
         {
             std::getline(file, tempName);
             counter++;
         }
-        if (counter % 6 == 2)
+        if (counter % 7 == 2)
         {
             std::getline(file, tempSurname);
             counter++;
         }
-        if (counter % 6 == 3)
+        if (counter % 7 == 3)
         {
             std::getline(file, tempAdress);
             counter++;
         }
-        if (counter % 6 == 4)
+        if (counter % 7 == 4)
+        {
+            std::getline(file, tempPositionString);
+            tempPosition = static_cast<Position>(stoi(tempPositionString));
+            counter++;
+            ;
+        }
+        if (counter % 7 == 5 && tempPosition == Position::Student)
         {
             std::getline(file, stringTempIndex);
             tempIndex = std::stoi(stringTempIndex);
             counter++;
         }
-        if (counter % 6 == 5)
+        if (counter % 7 == 5 && tempPosition == Position::Employee)
+        {
+            std::getline(file, stringTempSalary);
+            tempSalary = std::stof(stringTempSalary);
+            counter++;
+        }
+        if (counter % 7 == 6)
         {
             std::getline(file, tempPESEL);
             counter++;
         }
-        if (counter % 6 == 0)
+        if (counter % 7 == 0)
         {
             std::getline(file, tempSexString);
             tempSex = static_cast<Sex>(stoi(tempSexString));
             counter++;
         }
 
-        database_.push_back(std::make_shared<Person>(Student{tempName, tempSurname, tempAdress, tempIndex, tempPESEL, tempSex}));
+        if (tempPosition == Position::Student)
+        {
+            database_.push_back(std::make_shared<Person>(Student{tempName, tempSurname, tempAdress, tempIndex, tempPESEL, tempSex, tempPosition}));
+        }
+        else if (tempPosition == Position::Student)
+        {
+            database_.push_back(std::make_shared<Person>(Employee{tempName, tempSurname, tempAdress, tempSalary, tempPESEL, tempSex, tempPosition}));
+        }
     }
 }
 
@@ -226,11 +251,12 @@ void Database::saveToFile()
         file << ptr->getName() << std::endl;
         file << ptr->getSurname() << std::endl;
         file << ptr->getAdress() << std::endl;
-        if (ptr->classId == 1)
+        file << static_cast<int>(ptr->getPosition()) << std::endl;
+        if (ptr->getPosition() == Position::Student)
         {
             file << ptr->getIndex() << std::endl;
         }
-        else if (ptr->classId == 2)
+        else if (ptr->getPosition() == Position::Employee)
         {
             file << ptr->getSalary() << std::endl;
         }
@@ -240,8 +266,9 @@ void Database::saveToFile()
     file << std::endl;
 }
 
-std::shared_ptr<Person> Database::getStudentRecord(int pos)
+std::shared_ptr<Person> Database::getPtrToRecord(int pos)
 {
-    std::shared_ptr<Person> tempPtr = database_.at(pos);
-    return tempPtr;
+    // std::shared_ptr<Person> tempPtr = database_.at(pos);
+    return database_.at(pos);
+    ;
 }

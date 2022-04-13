@@ -4,6 +4,8 @@
 std::string Employee::getName() const { return name_; }
 std::string Employee::getSurname() const { return surname_; }
 std::string Employee::getAdress() const { return adress_; }
+Position Employee::getPosition() const { return position_; }
+int Employee::getIndex() const { return 0; }
 float Employee::getSalary() const { return salary_; }
 std::string Employee::getPESEL() const { return PESEL_; }
 Sex Employee::getSex() const { return sex_; }
@@ -12,6 +14,8 @@ Sex Employee::getSex() const { return sex_; }
 void Employee::setName(const std::string &name) { name_ = name; }
 void Employee::setSurname(const std::string &surname) { surname_ = surname; }
 void Employee::setAdress(const std::string &adress) { adress_ = adress; }
+void Employee::setPosition(const Position &position) { position_ = position; }
+void Employee::setIndex(const int &) {}
 void Employee::setSalary(const float &salary) { salary_ = salary; }
 void Employee::setPESEL(const std::string &PESEL) { PESEL_ = PESEL; }
 void Employee::setSex(const Sex &sex) { sex_ = sex; }
