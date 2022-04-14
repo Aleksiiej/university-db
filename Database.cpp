@@ -24,13 +24,14 @@ void Database::printByPtr(const std::shared_ptr<Person> ptr) const
     std::cout << "Surname: " << ptr->getSurname() << std::endl;
     std::cout << "Adress: " << ptr->getAdress() << std::endl;
     std::cout << "Position: " << ptr->positionPrint[ptr->getPosition()] << std::endl;
-    if (ptr->getPosition() == Position::Student)
+    switch (ptr->getPosition())
     {
+    case Position::Student:
         std::cout << "Index: " << ptr->getIndex() << std::endl;
-    }
-    else if (ptr->getPosition() == Position::Employee)
-    {
-        std::cout << "Salary: " << ptr->getSalary() << std::endl;
+        break;
+    case Position::Employee:
+        std::cout << "Salary: " << std::fixed << std::setprecision(2) << ptr->getSalary() << std::endl;
+        break;
     }
     std::cout << "PESEL: " << ptr->getPESEL() << std::endl;
     std::cout << "Sex: " << ptr->sexPrint[ptr->getSex()] << std::endl;
@@ -94,53 +95,7 @@ void Database::remove(const int &index)
 
 bool Database::validatePESEL(const std::string &PESEL) const
 {
-    if (PESEL.size() != 11)
-    {
-        std::cout << "PESEL is invalid" << std::endl;
-        return false;
-    }
-
-    std::string Month = PESEL.substr(2, 2);
-    std::string Day = PESEL.substr(4, 2);
-
-    if (std::stoi(Month) < 1 && std::stoi(Month) > 12)
-    {
-        std::cout << "PESEL is invalid" << std::endl;
-        return false;
-    }
-    if (std::stoi(Month) == 2 && (std::stoi(Day) < 1 || std::stoi(Day) > 29))
-    {
-        std::cout << "PESEL is invalid" << std::endl;
-        return false;
-    }
-    if ((std::stoi(Month) == 4 || std::stoi(Month) == 6 || std::stoi(Month) == 9 || std::stoi(Month) == 11) && (std::stoi(Day) < 1 || std::stoi(Day) > 30))
-    {
-        std::cout << "PESEL is invalid" << std::endl;
-        return false;
-    }
-    if ((std::stoi(Month) == 1 || std::stoi(Month) == 3 || std::stoi(Month) == 5 || std::stoi(Month) == 7 || std::stoi(Month) == 8 || std::stoi(Month) == 10 || std::stoi(Month) == 12) && (std::stoi(Day) < 1 && std::stoi(Day) > 31))
-    {
-        std::cout << "PESEL is invalid" << std::endl;
-        return false;
-    }
-
-    std::vector<int> weights{1, 3, 7, 9, 1, 3, 7, 9, 1, 3};
-    std::transform(begin(weights), end(weights), begin(PESEL), begin(weights),
-                   [](auto weight, auto PESELNumber)
-                   { return weight * (PESELNumber - '0'); });
-    std::string tempStr = std::to_string(std::accumulate(begin(weights), end(weights), 0));
-    int controlNumber = 10 - (tempStr.back() - '0');
-
-    if (controlNumber == (PESEL.back() - '0'))
-    {
-        std::cout << "PESEL is valid" << std::endl;
-        return true;
-    }
-    else
-    {
-        std::cout << "PESEL is invalid" << std::endl;
-        return false;
-    }
+    return validator_.validatePESEL(PESEL);
 }
 
 void Database::loadFromFile(const std::string &fileName)

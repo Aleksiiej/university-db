@@ -5,9 +5,11 @@
 #include <memory>
 #include <numeric>
 #include <fstream>
+#include <iomanip>
 #include "Person.hpp"
 #include "Student.hpp"
 #include "Employee.hpp"
+#include "PESELValidator.hpp"
 
 class Database
 {
@@ -28,10 +30,10 @@ public:
     bool validatePESEL(const std::string &PESEL) const;                                                                                                                                        // validates given PESEL
     void loadFromFile(const std::string &fileName = "../database.txt");                                                                                                                        // load records from .txt file to vector database_
     void saveToFile(const std::string &fileName = "../database.txt");                                                                                                                          // overwrites .txt file with records from vector database_
-
-    std::shared_ptr<Person> getPtrToRecord(const int &pos) const; // returns pointer to record at given position
+    std::shared_ptr<Person> getPtrToRecord(const int &pos) const;                                                                                                                              // returns pointer to record at given position
 
 private:
     std::vector<std::shared_ptr<Person>> database_;
+    PESELValidator validator_;
     std::string fileName_{"../database.txt"};
 };
