@@ -124,5 +124,3 @@ TEST_F(DatabaseFixture, validatePESELTest)
     EXPECT_FALSE(database.validatePESEL(database.getPtrToRecord(0)->getPESEL()));
     EXPECT_TRUE(database.validatePESEL("95082910213"));
 }
-
-
