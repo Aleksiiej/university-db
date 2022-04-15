@@ -93,6 +93,22 @@ void Database::remove(const int &index) noexcept
                                  { return el->getIndex() == index; }));
 }
 
+void Database::modifySalary(const std::string& PESEL) noexcept
+{
+    system("clear");
+    std::shared_ptr<Person> tempPtr = findByPESEL(PESEL);
+    printByPtr(tempPtr);
+    std::cout << "Enter new salary: ";
+    float newSalary;
+    std::cin >> newSalary;
+    tempPtr->setSalary(newSalary);
+    system("clear");
+    printByPtr(tempPtr);
+    std::cout << "New salary set at value: " << std::fixed << std::setprecision(2) << tempPtr->getSalary() << std::endl;
+    std::cout << "Press any button to proceed...";
+    std::getchar(); std::getchar();
+}
+
 bool Database::validatePESEL(const std::string &PESEL) const noexcept
 {
     return validator_.validatePESEL(PESEL);

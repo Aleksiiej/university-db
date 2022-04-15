@@ -22,10 +22,11 @@ public:
     std::shared_ptr<Person> findByPESEL(const std::string &PESEL) const noexcept;                                                                                                                       // searches for records with given pointer and returns pointer to this record
     void sortBySurname() noexcept;                                                                                                                                                                      // sorts records by surnames
     void sortByPESEL() noexcept;                                                                                                                                                                        // sort records by PESEL
-    void remove(const int &index) noexcept;                                                                                                                                                             // removes record with given index
-    bool validatePESEL(const std::string &PESEL) const noexcept;                                                                                                                                        // validates given PESEL
+    void remove(const int &index) noexcept;
+    void modifySalary(const std::string& PESEL) noexcept;                                                                                                                                                               // removes record with given index
+    bool validatePESEL(const std::string &PESEL) const noexcept;                                                                                                                                         // validates given PESEL
     void loadFromFile(const std::string &fileName = "../database.txt") noexcept;                                                                                                                        // load records from .txt file to vector database_
-    void saveToFile(const std::string &fileName = "../database.txt") noexcept;                                                                                                                          // overwrites .txt file with records from vector database_
+    void saveToFile(const std::string &fileName = "../database.txt") noexcept;                                                                                                                       // overwrites .txt file with records from vector database_
     std::shared_ptr<Person> getPtrToRecord(const int &pos) const;                                                                                                                                       // returns pointer to record at given position
 
 private:
