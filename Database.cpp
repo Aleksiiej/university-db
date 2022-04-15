@@ -215,6 +215,225 @@ void Database::saveToFile(const std::string &fileName)
     }
 }
 
+void Database::generateData(const int &number)
+{
+    Sex tempSex;
+    std::string tempName;
+    std::string tempSurname;
+    std::string tempAdress;
+    Position tempPosition;
+    int tempIndex;
+    float tempSalary;
+    std::string tempPESEL;
+
+    for (int i = 0; i < number; i++)
+    {
+        std::random_device rd;
+        std::mt19937 rng(rd());
+        std::uniform_int_distribution<> distrib(0, 1);
+        int maleOrFemale = distrib(rng);      // 0 - male, 1 - female
+        int studentOrEmployee = distrib(rng); // 0 - student, 1 - employee
+
+        switch (maleOrFemale)
+        {
+        case 0:
+            tempSex = Sex::male;
+            tempName = generateRandomMaleName();
+            tempSurname = generateRandomMaleSurname();
+            break;
+        case 1:
+            tempSex = Sex::female;
+            tempName = generateRandomFemaleName();
+            tempSurname = generateRandomFemaleSurname();
+            break;
+        }
+        tempAdress = generateRandomAdress();
+        switch (studentOrEmployee)
+        {
+        case 0:
+            tempPosition = Position::Student;
+            tempIndex = generateRandomIndex();
+            break;
+        case 1:
+            tempPosition = Position::Employee;
+            tempSalary = generateRandomSalary();
+            break;
+        }
+        tempPESEL = generateRandomPESEL();
+
+        switch (studentOrEmployee)
+        {
+        case 0:
+            database_.push_back(std::make_shared<Student>(Student{tempName, tempSurname, tempAdress, tempIndex, tempPESEL, tempSex, tempPosition}));
+            break;
+
+        case 1:
+            database_.push_back(std::make_shared<Employee>(Employee{tempName, tempSurname, tempAdress, tempSalary, tempPESEL, tempSex, tempPosition}));
+            break;
+        }
+    }
+}
+
+std::string Database::generateRandomMaleName()
+{
+    std::fstream file("../RandomData/maleNames.txt", std::ios::in);
+    if (!file)
+    {
+        std::cout << "File was not opened properly \n Program will be closed" << std::endl;
+        exit(0);
+    }
+    std::string tempName;
+    std::random_device rd;
+    std::mt19937 rng(rd());
+    std::uniform_int_distribution<> distrib(0, 99);
+
+    for (int i = 0; i < distrib(rng); i++)
+    {
+        file >> tempName;
+    }
+    return tempName;
+}
+
+std::string Database::generateRandomFemaleName()
+{
+    std::fstream file("../RandomData/femaleNames.txt", std::ios::in);
+    if (!file)
+    {
+        std::cout << "File was not opened properly \n Program will be closed" << std::endl;
+        exit(0);
+    }
+    std::string tempName;
+    std::random_device rd;
+    std::mt19937 rng(rd());
+    std::uniform_int_distribution<> distrib(0, 99);
+
+    for (int i = 0; i < distrib(rng); i++)
+    {
+        file >> tempName;
+    }
+    return tempName;
+}
+
+std::string Database::generateRandomMaleSurname()
+{
+    std::fstream file("../RandomData/maleSurnames.txt", std::ios::in);
+    if (!file)
+    {
+        std::cout << "File was not opened properly \n Program will be closed" << std::endl;
+        exit(0);
+    }
+    std::string tempSurname;
+    std::random_device rd;
+    std::mt19937 rng(rd());
+    std::uniform_int_distribution<> distrib(0, 99);
+
+    for (int i = 0; i < distrib(rng); i++)
+    {
+        file >> tempSurname;
+    }
+    return tempSurname;
+}
+
+std::string Database::generateRandomFemaleSurname()
+{
+    std::fstream file("../RandomData/femaleSurnames.txt", std::ios::in);
+    if (!file)
+    {
+        std::cout << "File was not opened properly \n Program will be closed" << std::endl;
+        exit(0);
+    }
+    std::string tempSurname;
+    std::random_device rd;
+    std::mt19937 rng(rd());
+    std::uniform_int_distribution<> distrib(0, 99);
+
+    for (int i = 0; i < distrib(rng); i++)
+    {
+        file >> tempSurname;
+    }
+    return tempSurname;
+}
+
+std::string Database::generateRandomAdress()
+{
+    std::fstream file("../RandomData/adresses.txt", std::ios::in);
+    if (!file)
+    {
+        std::cout << "File was not opened properly \n Program will be closed" << std::endl;
+        exit(0);
+    }
+    std::string tempAdress;
+    std::random_device rd;
+    std::mt19937 rng(rd());
+    std::uniform_int_distribution<> distrib(0, 99);
+
+    for (int i = 0; i < distrib(rng); i++)
+    {
+        std::getline(file, tempAdress);
+    }
+    return tempAdress;
+}
+
+int Database::generateRandomIndex()
+{
+    std::fstream file("../RandomData/indexes.txt", std::ios::in);
+    if (!file)
+    {
+        std::cout << "File was not opened properly \n Program will be closed" << std::endl;
+        exit(0);
+    }
+    std::string tempIndex;
+    std::random_device rd;
+    std::mt19937 rng(rd());
+    std::uniform_int_distribution<> distrib(0, 99);
+
+    for (int i = 0; i < distrib(rng); i++)
+    {
+        file >> tempIndex;
+    }
+    return std::stoi(tempIndex);
+}
+
+float Database::generateRandomSalary()
+{
+    std::fstream file("../RandomData/salaries.txt", std::ios::in);
+    if (!file)
+    {
+        std::cout << "File was not opened properly \n Program will be closed" << std::endl;
+        exit(0);
+    }
+    std::string tempSalary;
+    std::random_device rd;
+    std::mt19937 rng(rd());
+    std::uniform_int_distribution<> distrib(0, 99);
+
+    for (int i = 0; i < distrib(rng); i++)
+    {
+        file >> tempSalary;
+    }
+    return std::stof(tempSalary);
+}
+
+std::string Database::generateRandomPESEL()
+{
+    std::fstream file("../RandomData/pesels.txt", std::ios::in);
+    if (!file)
+    {
+        std::cout << "File was not opened properly \n Program will be closed" << std::endl;
+        exit(0);
+    }
+    std::string tempPESEL;
+    std::random_device rd;
+    std::mt19937 rng(rd());
+    std::uniform_int_distribution<> distrib(0, 99);
+
+    for (int i = 0; i < distrib(rng); i++)
+    {
+        file >> tempPESEL;
+    }
+    return tempPESEL;
+}
+
 std::shared_ptr<Person> Database::getPtrToRecord(const int &pos) const
 {
     return database_.at(pos);

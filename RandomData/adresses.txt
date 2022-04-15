@@ -1,0 +1,100 @@
+Ashland	655 Nec, St.
+Selma	Ap #167-1164 Vitae, St.
+Minneapolis	Ap #636-2745 Risus, St.
+Bell	Ap #827-7203 Eu, St.
+Laconia	8532 Auctor Road
+Coos Bay	P.O. Box 771, 7163 Phasellus Ave
+Clearwater	P.O. Box 846, 1259 Eu Rd.
+Frankfort	P.O. Box 166, 2194 Vulputate, Ave
+Port Jervis	3528 Velit Street
+Westlake Village	897-4200 Pretium St.
+Columbus	4353 Blandit Rd.
+Somersworth	P.O. Box 555, 6839 Euismod St.
+Easton	Ap #345-4878 Pharetra. Av.
+Pascagoula	720-9764 Velit. Ave
+Chino Hills	Ap #189-3788 Eu Avenue
+Newport Beach	211-5253 Id, Rd.
+San Luis Obispo	9864 Libero. Street
+Radford	P.O. Box 475, 8076 Urna Street
+Gloversville	Ap #634-8871 Lectus Rd.
+Hawthorne	559-7963 Enim St.
+Los Angeles	P.O. Box 500, 7901 Mi Road
+Cerritos	P.O. Box 272, 5265 Libero. Rd.
+Bowie	991-5623 Nunc St.
+Centennial	Ap #117-608 Ridiculus Rd.
+Madison	Ap #826-1411 Aliquet. Rd.
+Hannibal	3496 Donec St.
+La Habra Heights	245-6090 Rutrum Rd.
+New London	Ap #842-568 Donec Ave
+Marietta	8415 Nullam St.
+Sheridan	350-5176 Adipiscing, Avenue
+Vicksburg	463-6647 Enim Rd.
+Beverly Hills	Ap #314-5548 Elit St.
+Shamokin	Ap #593-7133 Neque St.
+Gilbert	Ap #811-1151 Quis Street
+Mesquite	976-2737 Tincidunt Avenue
+West Springfield	Ap #276-7578 Amet Road
+Elizabeth City	950-7427 Mauris. Rd.
+Warwick	P.O. Box 352, 1405 Convallis Rd.
+Scranton	P.O. Box 397, 5232 Duis Ave
+Chula Vista	P.O. Box 401, 1231 Lectus St.
+Jamestown	9015 Enim, St.
+Cumberland	129-5618 Sed St.
+Kahului	P.O. Box 420, 6105 Luctus Rd.
+Lawrence	P.O. Box 294, 4936 Sagittis Road
+Jonesboro	886-8159 Donec Rd.
+Oklahoma City	138 Amet, Street
+Alhambra	Ap #117-7109 Ac St.
+Monroe	166-3614 Elit, St.
+Plainfield	P.O. Box 196, 9488 Montes, Av.
+Idaho Falls	P.O. Box 327, 7073 Orci Road
+Altoona	P.O. Box 373, 3183 Malesuada Road
+Albany	P.O. Box 873, 1903 Facilisis St.
+Waco	P.O. Box 805, 8343 Consequat Ave
+Jonesboro	714-6238 Donec Rd.
+Del Rio	Ap #311-4730 Nibh. St.
+Fremont	Ap #331-8396 Dictum Rd.
+Woonsocket	P.O. Box 542, 239 Hymenaeos. St.
+Geneva	P.O. Box 552, 2415 Est. Rd.
+Ventura	293-4118 Vulputate, Ave
+Barre	146-7346 Bibendum. Rd.
+Reading	136-2489 Auctor Avenue
+Brockton	257-9999 Convallis Rd.
+Evansville	Ap #637-9283 Sit Road
+Westfield	Ap #959-893 Magnis Av.
+Blacksburg	Ap #354-5783 Arcu Rd.
+Galesburg	365-9804 Etiam Avenue
+Melrose	P.O. Box 704, 1903 Lectus, St.
+Bangor	713-2928 Fusce Ave
+Idabel	398-7626 Penatibus Av.
+Green River	236 Sed, Ave
+Bandera	P.O. Box 449, 6449 Ut, Road
+Hartford	3815 Vitae, St.
+Duluth	460-2539 Faucibus Rd.
+Salem	P.O. Box 754, 3438 Ultrices Rd.
+Kona	4872 Phasellus St.
+Sturgis	1419 Magna Rd.
+Sherrill	431-8914 Interdum Rd.
+Ontario	5971 Suspendisse Street
+Sedalia	P.O. Box 984, 847 Mi Avenue
+Nanticoke	6303 Maecenas Av.
+Stamford	914-1303 Semper Road
+Sioux Falls	Ap #843-7787 Ipsum Street
+Catskill	3453 Vitae Ave
+Visalia	9134 Semper Avenue
+Vernon	P.O. Box 483, 732 Eget Avenue
+Santa Barbara	Ap #461-1360 Lorem, Ave
+Aguadilla	1428 Lectus Street
+Lock Haven	690-1624 Blandit Avenue
+Wausau	1766 Quis Rd.
+Janesville	513-9764 Dolor St.
+Green Bay	P.O. Box 325, 7333 Eget St.
+Scottsbluff	9592 Suspendisse Av.
+Brea	Ap #262-623 Lacus St.
+Thiensville	3039 Aliquam St.
+Pierre	P.O. Box 416, 5507 Nam Rd.
+Lahaina	6999 Purus Rd.
+Middletown	816-6042 Tellus, Avenue
+Charleston	358-6555 Erat, Rd.
+Sturgis	3127 Aliquam, Ave
+Union City	Ap #382-772 Nullam Rd.

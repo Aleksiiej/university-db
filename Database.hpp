@@ -4,6 +4,7 @@
 #include <memory>
 #include <fstream>
 #include <iomanip>
+#include <random>
 #include "Person.hpp"
 #include "Student.hpp"
 #include "Employee.hpp"
@@ -22,13 +23,22 @@ public:
     std::shared_ptr<Person> findByPESEL(const std::string &PESEL) const;                                                                                                                       // searches for records with given pointer and returns pointer to this record
     void sortBySurname();                                                                                                                                                                      // sorts records by surnames
     void sortByPESEL();
-    void sortBySalary();                                                                                                                                                                // sort records by PESEL
+    void sortBySalary(); // sort records by PESEL
     void remove(const int &index);
-    void modifySalary(const std::string& PESEL, const float& newSalary);                                                                                                                                                               // removes record with given index
-    bool validatePESEL(const std::string &PESEL) const;                                                                                                                                         // validates given PESEL
-    void loadFromFile(const std::string &fileName = "../database.txt");                                                                                                                        // load records from .txt file to vector database_
-    void saveToFile(const std::string &fileName = "../database.txt");                                                                                                                       // overwrites .txt file with records from vector database_
-    std::shared_ptr<Person> getPtrToRecord(const int &pos) const;                                                                                                                                       // returns pointer to record at given position
+    void modifySalary(const std::string &PESEL, const float &newSalary); // removes record with given index
+    bool validatePESEL(const std::string &PESEL) const;                  // validates given PESEL
+    void loadFromFile(const std::string &fileName = "../database.txt");  // load records from .txt file to vector database_
+    void saveToFile(const std::string &fileName = "../database.txt");    // overwrites .txt file with records from vector database_
+    void generateData(const int& number);
+    std::string generateRandomMaleName();
+    std::string generateRandomFemaleName();
+    std::string generateRandomMaleSurname();
+    std::string generateRandomFemaleSurname();
+    std::string generateRandomAdress();
+    int generateRandomIndex();
+    float generateRandomSalary();
+    std::string generateRandomPESEL();
+    std::shared_ptr<Person> getPtrToRecord(const int &pos) const; // returns pointer to record at given position
 
 private:
     std::vector<std::shared_ptr<Person>> database_;
