@@ -9,6 +9,8 @@ public:
     {
     }
 
+    virtual ~Employee() = default;
+
     // getters
     std::string getName() const override;
     std::string getSurname() const override;

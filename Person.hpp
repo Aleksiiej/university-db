@@ -22,6 +22,8 @@ public:
     {
     }
 
+    virtual ~Person() = default;
+
     // getters
     virtual std::string getName() const;
     virtual std::string getSurname() const;

@@ -1,9 +1,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include <algorithm>
 #include <memory>
-#include <numeric>
 #include <fstream>
 #include <iomanip>
 #include "Person.hpp"
@@ -14,8 +12,6 @@
 class Database
 {
 public:
-    Database() = default;
-
     void addStudent(const std::string &name, const std::string &surname, const std::string &adress, const int &index, const std::string &PESEL, const Sex &sex, const Position &position) noexcept;     // adds record
     void addEmployee(const std::string &name, const std::string &surname, const std::string &adress, const float &salary, const std::string &PESEL, const Sex &sex, const Position &position) noexcept; // adds employee record
     void show() const noexcept;                                                                                                                                                                         // shows all records
@@ -30,7 +26,7 @@ public:
     bool validatePESEL(const std::string &PESEL) const noexcept;                                                                                                                                        // validates given PESEL
     void loadFromFile(const std::string &fileName = "../database.txt") noexcept;                                                                                                                        // load records from .txt file to vector database_
     void saveToFile(const std::string &fileName = "../database.txt") noexcept;                                                                                                                          // overwrites .txt file with records from vector database_
-    std::shared_ptr<Person> getPtrToRecord(const int &pos) const;                                                                                                                              // returns pointer to record at given position
+    std::shared_ptr<Person> getPtrToRecord(const int &pos) const;                                                                                                                                       // returns pointer to record at given position
 
 private:
     std::vector<std::shared_ptr<Person>> database_;
