@@ -11,6 +11,7 @@ protected:
         database.addStudent("Jan", "Nowak", "Gniezno, Jemiolowa 16", 217025, "93121312345", Sex::male, Position::Student);
         database.addStudent("Aleksandra", "Nowakowska", "Bydgoszcz, Zwyczajna 5", 126574, "93040523495", Sex::female, Position::Student);
         database.addStudent("Piotr", "Kowalski", "Warszawa, Przykladowa 20", 223412, "89275430298", Sex::male, Position::Student);
+        database.addEmployee("Renata", "Zaradna", "Ustrzyki, Powstancow Malopolskich 133", 4340.00, "73031054872", Sex::female, Position::Employee);
         database.addEmployee("Andrzej", "Niezbedny", "Sopot, Powstancow Slaskich 10", 4600.50, "78032559472", Sex::male, Position::Employee);
     }
 
@@ -45,13 +46,13 @@ TEST_F(DatabaseFixture, addStudentTest)
 
 TEST_F(DatabaseFixture, addEmployeeTest)
 {
-    EXPECT_EQ(testEmployeeName, database.getPtrToRecord(3)->getName());
-    EXPECT_EQ(testEmployeeSurname, database.getPtrToRecord(3)->getSurname());
-    EXPECT_EQ(testEmployeeAdress, database.getPtrToRecord(3)->getAdress());
-    EXPECT_EQ(testEmployeeSalary, database.getPtrToRecord(3)->getSalary());
-    EXPECT_EQ(testEmployeePESEL, database.getPtrToRecord(3)->getPESEL());
-    EXPECT_EQ(testEmployeeSex, database.getPtrToRecord(3)->getSex());
-    EXPECT_EQ(testEmployeePosition, database.getPtrToRecord(3)->getPosition());
+    EXPECT_EQ(testEmployeeName, database.getPtrToRecord(4)->getName());
+    EXPECT_EQ(testEmployeeSurname, database.getPtrToRecord(4)->getSurname());
+    EXPECT_EQ(testEmployeeAdress, database.getPtrToRecord(4)->getAdress());
+    EXPECT_EQ(testEmployeeSalary, database.getPtrToRecord(4)->getSalary());
+    EXPECT_EQ(testEmployeePESEL, database.getPtrToRecord(4)->getPESEL());
+    EXPECT_EQ(testEmployeeSex, database.getPtrToRecord(4)->getSex());
+    EXPECT_EQ(testEmployeePosition, database.getPtrToRecord(4)->getPosition());
 }
 
 TEST_F(DatabaseFixture, findBySurnameTest)
@@ -97,13 +98,13 @@ TEST_F(DatabaseFixture, sortByPESELTest)
 {
     database.sortByPESEL();
 
-    EXPECT_EQ(testStudentName, database.getPtrToRecord(2)->getName());
-    EXPECT_EQ(testStudentSurname, database.getPtrToRecord(2)->getSurname());
-    EXPECT_EQ(testStudentAdress, database.getPtrToRecord(2)->getAdress());
-    EXPECT_EQ(testStudentIndex, database.getPtrToRecord(2)->getIndex());
-    EXPECT_EQ(testStudentPESEL, database.getPtrToRecord(2)->getPESEL());
-    EXPECT_EQ(testStudentSex, database.getPtrToRecord(2)->getSex());
-    EXPECT_EQ(testStudentPosition, database.getPtrToRecord(2)->getPosition());
+    EXPECT_EQ(testStudentName, database.getPtrToRecord(3)->getName());
+    EXPECT_EQ(testStudentSurname, database.getPtrToRecord(3)->getSurname());
+    EXPECT_EQ(testStudentAdress, database.getPtrToRecord(3)->getAdress());
+    EXPECT_EQ(testStudentIndex, database.getPtrToRecord(3)->getIndex());
+    EXPECT_EQ(testStudentPESEL, database.getPtrToRecord(3)->getPESEL());
+    EXPECT_EQ(testStudentSex, database.getPtrToRecord(3)->getSex());
+    EXPECT_EQ(testStudentPosition, database.getPtrToRecord(3)->getPosition());
 }
 
 TEST_F(DatabaseFixture, removeTest)
