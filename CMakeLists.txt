@@ -19,6 +19,7 @@ set(SRC_LIST
     Student.cpp
     Employee.cpp
     PESELValidator.cpp
+    RecordGenerator.cpp
 )
 
 set(SRC_LIST_UT
@@ -27,6 +28,7 @@ set(SRC_LIST_UT
     Student.cpp
     Employee.cpp
     PESELValidator.cpp
+    RecordGenerator.cpp
 )
 
 add_executable(${PROJECT_NAME} ${SRC_LIST})

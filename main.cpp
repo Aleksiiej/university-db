@@ -16,7 +16,7 @@ int main()
     // database.show();
     // database.sortBySalary();
     // database.show();
-    database.generateData(1);
+    database.generateDataFromRecordGenerator(4);
     // std::cout << database.generateRandomMaleName() << std::endl;
     // std::cout << database.generateRandomFemaleName() << std::endl;
     // std::cout << database.generateRandomMaleSurname() << std::endl;
