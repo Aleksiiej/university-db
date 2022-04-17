@@ -31,11 +31,11 @@ std::unique_ptr<Person> RecordGenerator::generateRandomRecord() const
     switch (studentOrEmployee)
     {
     case 0:
-        tempPtr = std::make_unique<Student>(Student{tempName, tempSurname, generateRandomAdress(), generateRandomIndex(), generateRandomPESEL(), tempSex, Position::Student});
+        tempPtr = std::make_unique<Student>(Student{tempName, tempSurname, generateRandomAdress(), generateRandomIndex(), generateRandomPESEL(tempSex), tempSex, Position::Student});
         break;
 
     case 1:
-        tempPtr = std::make_unique<Employee>(Employee{tempName, tempSurname, generateRandomAdress(), generateRandomSalary(), generateRandomPESEL(), tempSex, Position::Employee});
+        tempPtr = std::make_unique<Employee>(Employee{tempName, tempSurname, generateRandomAdress(), generateRandomSalary(), generateRandomPESEL(tempSex), tempSex, Position::Employee});
         break;
     }
     return tempPtr;
@@ -143,60 +143,150 @@ std::string RecordGenerator::generateRandomAdress() const
 
 int RecordGenerator::generateRandomIndex() const
 {
-    std::fstream file("../RandomData/indexes.txt", std::ios::in);
-    if (!file)
-    {
-        std::cout << "File was not opened properly \n Program will be closed" << std::endl;
-        exit(0);
-    }
-    std::string tempIndex;
     std::random_device rd;
     std::mt19937 rng(rd());
-    std::uniform_int_distribution<> distrib(0, 99);
-
-    for (int i = 0; i < distrib(rng); i++)
-    {
-        file >> tempIndex;
-    }
-    return std::stoi(tempIndex);
+    std::uniform_int_distribution<> distrib(minIndex, maxIndex);
+    return distrib(rng);
 }
 
 float RecordGenerator::generateRandomSalary() const
 {
-    std::fstream file("../RandomData/salaries.txt", std::ios::in);
-    if (!file)
-    {
-        std::cout << "File was not opened properly \n Program will be closed" << std::endl;
-        exit(0);
-    }
-    std::string tempSalary;
     std::random_device rd;
     std::mt19937 rng(rd());
-    std::uniform_int_distribution<> distrib(0, 99);
-
-    for (int i = 0; i < distrib(rng); i++)
-    {
-        file >> tempSalary;
-    }
-    return std::stof(tempSalary);
+    std::uniform_int_distribution<> distrib(minSalary, maxSalary);
+    return distrib(rng);
 }
 
-std::string RecordGenerator::generateRandomPESEL() const
+std::string RecordGenerator::generateRandomPESEL(const Sex &sex) const
 {
-    std::fstream file("../RandomData/pesels.txt", std::ios::in);
-    if (!file)
-    {
-        std::cout << "File was not opened properly \n Program will be closed" << std::endl;
-        exit(0);
-    }
     std::string tempPESEL;
+
     std::random_device rd;
     std::mt19937 rng(rd());
-    std::uniform_int_distribution<> distrib(0, 99);
 
-    for (int i = 0; i < distrib(rng); i++)
+    // Year
+
+    std::uniform_int_distribution<> distrib(minYearIfBirth, maxYearOfBirth);
+    int yearOfBirth = distrib(rng);
+    std::string tempYear = std::to_string(yearOfBirth);
+    tempPESEL = tempPESEL + tempYear.at(2) + tempYear.at(3);
+    std::cout << tempPESEL << std::endl;
+
+    // Month
+
+    distrib = std::uniform_int_distribution<>(1, 12);
+    int monthOfBirth = distrib(rng);
+    if (monthOfBirth < 10)
     {
-        file >> tempPESEL;
+        tempPESEL += "0";
     }
+    tempPESEL += std::to_string(monthOfBirth);
+    std::cout << tempPESEL << std::endl;
+
+    // Day
+
+    if (monthOfBirth == 1 || monthOfBirth == 3 || monthOfBirth == 5 || monthOfBirth == 7 || monthOfBirth == 8 || monthOfBirth == 10 || monthOfBirth == 12)
+    {
+        distrib = std::uniform_int_distribution<>(1, 31);
+        int tempDay = distrib(rng);
+        if (tempDay < 10)
+        {
+            tempPESEL += "0";
+        }
+        tempPESEL += std::to_string(tempDay);
+    }
+    else if (monthOfBirth == 2 || monthOfBirth == 4 || monthOfBirth == 6 || monthOfBirth == 9 || monthOfBirth == 11)
+    {
+        distrib = std::uniform_int_distribution<>(1, 30);
+        int tempDay = distrib(rng);
+        if (tempDay < 10)
+        {
+            tempPESEL += "0";
+        }
+        tempPESEL += std::to_string(tempDay);
+    }
+    else if (monthOfBirth == 2)
+    {
+        if (yearOfBirth % 4 == 0 || (yearOfBirth % 100 == 0 && yearOfBirth % 400 == 0))
+        {
+            distrib = std::uniform_int_distribution<>(1, 29);
+            int tempDay = distrib(rng);
+            if (tempDay < 10)
+            {
+                tempPESEL += "0";
+            }
+            tempPESEL += std::to_string(tempDay);
+        }
+        else
+        {
+            distrib = std::uniform_int_distribution<>(1, 28);
+            int tempDay = distrib(rng);
+            if (tempDay < 10)
+            {
+                tempPESEL += "0";
+            }
+            tempPESEL += std::to_string(tempDay);
+        }
+    }
+    std::cout << tempPESEL << std::endl;
+
+    // Sex
+
+    distrib = std::uniform_int_distribution<>(0, 9);
+    for (int i = 0; i < 3; i++)
+    {
+        tempPESEL += std::to_string(distrib(rng));
+    }
+
+    distrib = std::uniform_int_distribution<>(0, 9);
+    int number = distrib(rng);
+    switch (sex)
+    {
+    case Sex::male:
+        while (number % 2 == 0)
+        {
+            number = distrib(rng);
+        }
+        tempPESEL += std::to_string(number);
+        break;
+
+    case Sex::female:
+        while (number % 2 != 0)
+        {
+            number = distrib(rng);
+        }
+        tempPESEL += std::to_string(number);
+        break;
+    }
+    std::cout << tempPESEL << std::endl;
+
+    // Control number
+
+    std::vector<int> weights{1, 3, 7, 9, 1, 3, 7, 9, 1, 3};
+
+    std::transform(begin(weights), end(weights), begin(tempPESEL), begin(weights),
+                   [](auto weight, auto PESELNumber)
+                   { return weight * (PESELNumber - '0'); });
+
+    std::for_each(begin(weights), end(weights), [] (auto a) { std::cout << a <<" "; });
+    std::cout << std::endl;
+
+    std::string tempStr = std::to_string(std::accumulate(begin(weights), end(weights), 0));
+    std::cout << tempStr << std::endl;
+    int controlNumber = 10 - (tempStr.back() - '0');
+    if(controlNumber == 10)
+    {
+        controlNumber = 0;
+    }
+    std::cout << controlNumber << std::endl;
+    tempPESEL += std::to_string(controlNumber); 
+
+    std::cout << tempPESEL << std::endl;
+
     return tempPESEL;
 }
+
+// std::string generateRandomPESELYear(const std::string& tempPESEL) const
+// {
+
+// }

@@ -1,6 +1,6 @@
 #include "PESELValidator.hpp"
 
-bool PESELValidator::validatePESEL(const std::string &PESEL) const noexcept
+bool PESELValidator::validatePESEL(const std::string &PESEL) const
 {
     if (validatePESELSize(PESEL) == false)
     {
@@ -21,7 +21,7 @@ bool PESELValidator::validatePESEL(const std::string &PESEL) const noexcept
     return true;
 }
 
-bool PESELValidator::validatePESELSize(const std::string &PESEL) const noexcept
+bool PESELValidator::validatePESELSize(const std::string &PESEL) const
 {
     if (PESEL.size() != 11)
     {
@@ -30,7 +30,7 @@ bool PESELValidator::validatePESELSize(const std::string &PESEL) const noexcept
     return true;
 }
 
-bool PESELValidator::validatePESELDate(const std::string &PESEL) const noexcept
+bool PESELValidator::validatePESELDate(const std::string &PESEL) const
 {
     std::string Month = PESEL.substr(2, 2);
     std::string Day = PESEL.substr(4, 2);
@@ -54,7 +54,7 @@ bool PESELValidator::validatePESELDate(const std::string &PESEL) const noexcept
     return true;
 }
 
-bool PESELValidator::validateControlNumber(const std::string &PESEL) const noexcept
+bool PESELValidator::validateControlNumber(const std::string &PESEL) const
 {
     std::vector<int> weights{1, 3, 7, 9, 1, 3, 7, 9, 1, 3};
     std::transform(begin(weights), end(weights), begin(PESEL), begin(weights),
@@ -62,6 +62,10 @@ bool PESELValidator::validateControlNumber(const std::string &PESEL) const noexc
                    { return weight * (PESELNumber - '0'); });
     std::string tempStr = std::to_string(std::accumulate(begin(weights), end(weights), 0));
     int controlNumber = 10 - (tempStr.back() - '0');
+    if(controlNumber == 10)
+    {
+        controlNumber = 0;
+    }
 
     if (controlNumber != (PESEL.back() - '0'))
     {

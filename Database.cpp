@@ -12,7 +12,7 @@ void Database::addEmployee(const std::string &name, const std::string &surname, 
 
 void Database::show() const
 {
-    system("clear");
+    //system("clear");
     std::for_each(begin(database_), end(database_), [this](const auto ptr)
                   { printByPtr(ptr); });
 }
@@ -215,7 +215,7 @@ void Database::saveToFile(const std::string &fileName)
     }
 }
 
-void Database::generateDataFromRecordGenerator(const int &n)
+void Database::generateData(const int &n)
 {
     for (int i = 0; i < n; i++)
     {
