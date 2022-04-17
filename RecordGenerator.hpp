@@ -14,7 +14,7 @@ constexpr int maxIndex = 39999;
 constexpr float minSalary = 2000.00;
 constexpr float maxSalary = 6000.00;
 constexpr int minYearIfBirth = 1900;
-constexpr int maxYearOfBirth = 2022;
+constexpr int maxYearOfBirth = 1999;
 
 class RecordGenerator
 {
@@ -30,5 +30,7 @@ private:
     int generateRandomIndex() const;
     float generateRandomSalary() const;
     std::string generateRandomPESEL(const Sex& sex) const;
-    //std::string generateRandomPESELYear(const std::string& tempPESEL) const;
+    std::string generatePESELDate(std::string& tempPESEL) const;
+    std::string generatePESELSex(std::string& tempPESEL, const Sex& sex) const;
+    std::string generatePESELControlNumber(std::string& tempPESEL) const;
 };

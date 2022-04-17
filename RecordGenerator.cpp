@@ -49,6 +49,7 @@ std::string RecordGenerator::generateRandomMaleName() const
         std::cout << "File was not opened properly \n Program will be closed" << std::endl;
         exit(0);
     }
+    
     std::string tempName;
     std::random_device rd;
     std::mt19937 rng(rd());
@@ -160,7 +161,14 @@ float RecordGenerator::generateRandomSalary() const
 std::string RecordGenerator::generateRandomPESEL(const Sex &sex) const
 {
     std::string tempPESEL;
+    tempPESEL = generatePESELDate(tempPESEL);          // Date
+    tempPESEL = generatePESELSex(tempPESEL, sex);      // Sex
+    tempPESEL = generatePESELControlNumber(tempPESEL); // Control number
+    return tempPESEL;
+}
 
+std::string RecordGenerator::generatePESELDate(std::string &tempPESEL) const
+{
     std::random_device rd;
     std::mt19937 rng(rd());
 
@@ -188,51 +196,55 @@ std::string RecordGenerator::generateRandomPESEL(const Sex &sex) const
     if (monthOfBirth == 1 || monthOfBirth == 3 || monthOfBirth == 5 || monthOfBirth == 7 || monthOfBirth == 8 || monthOfBirth == 10 || monthOfBirth == 12)
     {
         distrib = std::uniform_int_distribution<>(1, 31);
-        int tempDay = distrib(rng);
-        if (tempDay < 10)
+        int dayOfBirth = distrib(rng);
+        if (dayOfBirth < 10)
         {
             tempPESEL += "0";
         }
-        tempPESEL += std::to_string(tempDay);
+        tempPESEL += std::to_string(dayOfBirth);
     }
     else if (monthOfBirth == 2 || monthOfBirth == 4 || monthOfBirth == 6 || monthOfBirth == 9 || monthOfBirth == 11)
     {
         distrib = std::uniform_int_distribution<>(1, 30);
-        int tempDay = distrib(rng);
-        if (tempDay < 10)
+        int dayOfBirth = distrib(rng);
+        if (dayOfBirth < 10)
         {
             tempPESEL += "0";
         }
-        tempPESEL += std::to_string(tempDay);
+        tempPESEL += std::to_string(dayOfBirth);
     }
     else if (monthOfBirth == 2)
     {
         if (yearOfBirth % 4 == 0 || (yearOfBirth % 100 == 0 && yearOfBirth % 400 == 0))
         {
             distrib = std::uniform_int_distribution<>(1, 29);
-            int tempDay = distrib(rng);
-            if (tempDay < 10)
+            int dayOfBirth = distrib(rng);
+            if (dayOfBirth < 10)
             {
                 tempPESEL += "0";
             }
-            tempPESEL += std::to_string(tempDay);
+            tempPESEL += std::to_string(dayOfBirth);
         }
         else
         {
             distrib = std::uniform_int_distribution<>(1, 28);
-            int tempDay = distrib(rng);
-            if (tempDay < 10)
+            int dayOfBirth = distrib(rng);
+            if (dayOfBirth < 10)
             {
                 tempPESEL += "0";
             }
-            tempPESEL += std::to_string(tempDay);
+            tempPESEL += std::to_string(dayOfBirth);
         }
     }
     std::cout << tempPESEL << std::endl;
+    return tempPESEL;
+}
 
-    // Sex
-
-    distrib = std::uniform_int_distribution<>(0, 9);
+std::string RecordGenerator::generatePESELSex(std::string &tempPESEL, const Sex &sex) const
+{
+    std::random_device rd;
+    std::mt19937 rng(rd());
+    std::uniform_int_distribution<> distrib(0, 9);
     for (int i = 0; i < 3; i++)
     {
         tempPESEL += std::to_string(distrib(rng));
@@ -259,34 +271,27 @@ std::string RecordGenerator::generateRandomPESEL(const Sex &sex) const
         break;
     }
     std::cout << tempPESEL << std::endl;
+    return tempPESEL;
+}
 
-    // Control number
-
+std::string RecordGenerator::generatePESELControlNumber(std::string &tempPESEL) const
+{
     std::vector<int> weights{1, 3, 7, 9, 1, 3, 7, 9, 1, 3};
-
     std::transform(begin(weights), end(weights), begin(tempPESEL), begin(weights),
                    [](auto weight, auto PESELNumber)
                    { return weight * (PESELNumber - '0'); });
 
-    std::for_each(begin(weights), end(weights), [] (auto a) { std::cout << a <<" "; });
+    std::for_each(begin(weights), end(weights), [](auto a)
+                  { std::cout << a << " "; });
     std::cout << std::endl;
-
     std::string tempStr = std::to_string(std::accumulate(begin(weights), end(weights), 0));
     std::cout << tempStr << std::endl;
     int controlNumber = 10 - (tempStr.back() - '0');
-    if(controlNumber == 10)
+    if (controlNumber == 10)
     {
         controlNumber = 0;
     }
     std::cout << controlNumber << std::endl;
-    tempPESEL += std::to_string(controlNumber); 
-
-    std::cout << tempPESEL << std::endl;
-
+    tempPESEL += std::to_string(controlNumber);
     return tempPESEL;
 }
-
-// std::string generateRandomPESELYear(const std::string& tempPESEL) const
-// {
-
-// }
