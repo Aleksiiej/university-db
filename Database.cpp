@@ -12,7 +12,7 @@ void Database::addEmployee(const std::string &name, const std::string &surname, 
 
 void Database::show() const
 {
-    // system("clear");
+    system("clear");
     std::for_each(begin(database_), end(database_), [this](const auto ptr)
                   { printByPtr(ptr); });
 }
