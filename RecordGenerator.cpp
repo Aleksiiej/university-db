@@ -178,7 +178,6 @@ std::string RecordGenerator::generatePESELDate(std::string &tempPESEL) const
     int yearOfBirth = distrib(rng);
     std::string tempYear = std::to_string(yearOfBirth);
     tempPESEL = tempPESEL + tempYear.at(2) + tempYear.at(3);
-    std::cout << tempPESEL << std::endl;
 
     // Month
 
@@ -189,7 +188,6 @@ std::string RecordGenerator::generatePESELDate(std::string &tempPESEL) const
         tempPESEL += "0";
     }
     tempPESEL += std::to_string(monthOfBirth);
-    std::cout << tempPESEL << std::endl;
 
     // Day
 
@@ -236,7 +234,6 @@ std::string RecordGenerator::generatePESELDate(std::string &tempPESEL) const
             tempPESEL += std::to_string(dayOfBirth);
         }
     }
-    std::cout << tempPESEL << std::endl;
     return tempPESEL;
 }
 
@@ -270,7 +267,6 @@ std::string RecordGenerator::generatePESELSex(std::string &tempPESEL, const Sex 
         tempPESEL += std::to_string(number);
         break;
     }
-    std::cout << tempPESEL << std::endl;
     return tempPESEL;
 }
 
@@ -280,18 +276,12 @@ std::string RecordGenerator::generatePESELControlNumber(std::string &tempPESEL) 
     std::transform(begin(weights), end(weights), begin(tempPESEL), begin(weights),
                    [](auto weight, auto PESELNumber)
                    { return weight * (PESELNumber - '0'); });
-
-    std::for_each(begin(weights), end(weights), [](auto a)
-                  { std::cout << a << " "; });
-    std::cout << std::endl;
     std::string tempStr = std::to_string(std::accumulate(begin(weights), end(weights), 0));
-    std::cout << tempStr << std::endl;
     int controlNumber = 10 - (tempStr.back() - '0');
     if (controlNumber == 10)
     {
         controlNumber = 0;
     }
-    std::cout << controlNumber << std::endl;
     tempPESEL += std::to_string(controlNumber);
     return tempPESEL;
 }
