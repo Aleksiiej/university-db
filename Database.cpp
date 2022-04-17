@@ -12,7 +12,7 @@ void Database::addEmployee(const std::string &name, const std::string &surname, 
 
 void Database::show() const
 {
-    //system("clear");
+    // system("clear");
     std::for_each(begin(database_), end(database_), [this](const auto ptr)
                   { printByPtr(ptr); });
 }
@@ -113,7 +113,8 @@ void Database::modifySalary(const std::string &PESEL, const float &newSalary)
 
 bool Database::validatePESEL(const std::string &PESEL) const
 {
-    return validator_.validatePESEL(PESEL);
+    auto tempValidator = std::make_unique<PESELValidator>();
+    return tempValidator->validatePESEL(PESEL);
 }
 
 void Database::loadFromFile(const std::string &fileName)
@@ -217,9 +218,10 @@ void Database::saveToFile(const std::string &fileName)
 
 void Database::generateData(const int &n)
 {
+    auto tempGenerator = std::make_unique<RecordGenerator>();
     for (int i = 0; i < n; i++)
     {
-        database_.push_back(std::move(generator_.generateRandomRecord()));
+        database_.push_back(std::move(tempGenerator->generateRandomRecord()));
     }
 }
 

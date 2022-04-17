@@ -16,7 +16,7 @@ int main()
     // database.show();
     // database.sortBySalary();
     // database.show();
-    database.generateData(1);
+    database.generateData(4);
     // std::cout << database.generateRandomMaleName() << std::endl;
     // std::cout << database.generateRandomFemaleName() << std::endl;
     // std::cout << database.generateRandomMaleSurname() << std::endl;
@@ -26,4 +26,6 @@ int main()
     // std::cout << database.generateRandomSalary() << std::endl;
     // std::cout << database.generateRandomPESEL() << std::endl;
     database.show();
+    database.saveToFile();
+    database.validatePESEL("40122340392");
 }

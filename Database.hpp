@@ -32,9 +32,7 @@ public:
     void generateData(const int &n);                                     // generates n random records
     std::shared_ptr<Person> getPtrToRecord(const int &pos) const;        // returns pointer to record at given position
 
-// private:
+private:
     std::vector<std::shared_ptr<Person>> database_;
-    PESELValidator validator_;
-    RecordGenerator generator_;
     std::string fileName_{"../database.txt"};
 };
