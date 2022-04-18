@@ -1,9 +1,13 @@
 #include <iostream>
 #include "Database.hpp"
+#include "Menu.hpp"
 
 int main()
 {
     Database database;
+    Menu menu{database};
+    
+
     // database.addStudent("Jan", "Nowak", "Gniezno, Jemiolowa 16", 217025, "93121312345", Sex::male, Position::Student);
     // database.addStudent("Aleksandra", "Nowakowska", "Bydgoszcz, Zwyczajna 5", 126574, "93040523495", Sex::female, Position::Student);
     // database.addStudent("Piotr", "Kowalski", "Warszawa, Przykladowa 20", 223412, "89275430298", Sex::male, Position::Student);
@@ -16,7 +20,7 @@ int main()
     // database.show();
     // database.sortBySalary();
     // database.show();
-    database.generateData(4);
+    // database.generateData(4);
     // std::cout << database.generateRandomMaleName() << std::endl;
     // std::cout << database.generateRandomFemaleName() << std::endl;
     // std::cout << database.generateRandomMaleSurname() << std::endl;
@@ -25,7 +29,8 @@ int main()
     // std::cout << database.generateRandomIndex() << std::endl;
     // std::cout << database.generateRandomSalary() << std::endl;
     // std::cout << database.generateRandomPESEL() << std::endl;
-    database.show();
-    database.saveToFile();
-    database.validatePESEL("40122340392");
+    // database.show();
+    // database.saveToFile();
+    // database.validatePESEL("40122340392");
+    menu.run();
 }
