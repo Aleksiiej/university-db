@@ -25,9 +25,6 @@ void Menu::run() const noexcept
             ptrToDb_->show();
             std::cout << "Press enter to proceed...";
             std::getchar();
-            //system("clear");
-            std::cin.clear();
-            std::cin.ignore(1000, '\n');
             break;
 
         case 3:
@@ -67,12 +64,10 @@ void Menu::run() const noexcept
             exit(0);
 
         default:
-            system("clear");
-            std::cout << "Incorrent choice. Try again. " << std::endl;
-            std::cin.clear();
-            std::cin.ignore(1000, '\n');
             break;
         }
+        std::cin.clear();
+        std::cin.ignore(1000, '\n');
     }
 }
 
@@ -107,30 +102,23 @@ void Menu::enterData() const noexcept
     float salary;
     std::string PESEL;
     int sex;
+    
+    system("clear");
 
     std::cin.clear();
     std::cin.ignore(1000, '\n');
 
     std::cout << "Enter name: ";
-    std::cin >> name;
-    std::cin.clear();
-    std::cin.ignore(1000, '\n');
+    std::getline(std::cin, name);
 
     std::cout << "Enter surname: ";
-    std::cin >> surname;
-    std::cin.clear();
-    std::cin.ignore(1000, '\n');
+    std::getline(std::cin, surname);
 
     std::cout << "Enter adress: ";
     std::getline(std::cin, adress);
-    //std::cin.clear();
-    //std::cin.ignore(1000, '\n');
 
     std::cout << "Enter position: type 0 if student, 1 if employee: ";
     std::cin >> position;
-    std::cin.clear();
-    std::cin.ignore(1000, '\n');
-
     if (position == 0)
     {
         std::cout << "Enter index: ";
@@ -141,18 +129,12 @@ void Menu::enterData() const noexcept
         std::cout << "Enter salary: ";
         std::cin >> index;
     }
-    std::cin.clear();
-    std::cin.ignore(1000, '\n');
 
     std::cout << "Enter PESEL: ";
     std::cin >> PESEL;
-    std::cin.clear();
-    std::cin.ignore(1000, '\n');
 
     std::cout << "Enter sex: type 0 if male, 1 if female: ";
     std::cin >> sex;
-    std::cin.clear();
-    std::cin.ignore(1000, '\n');
 
     switch (position)
     {
