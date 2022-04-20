@@ -37,17 +37,19 @@ void Menu::run() noexcept
             break;
 
         case 5:
-            sortRecordsBySurname();
+            ptrToDb_->sortBySurname();
             break;
 
         case 6:
-            sortRecordsByPESEL();
+            ptrToDb_->sortByPESEL();
             break;
 
         case 7:
+            ptrToDb_->sortBySalary();
             break;
 
         case 8:
+            removeRecordByIndex();
             break;
 
         case 9:
@@ -197,12 +199,10 @@ void Menu::findRecordByPESEL() const noexcept
     }
 }
 
-void Menu::sortRecordsBySurname() const noexcept
+void Menu::removeRecordByIndex() const noexcept
 {
-    ptrToDb_->sortBySurname();
-}
-
-void Menu::sortRecordsByPESEL() const noexcept
-{
-    ptrToDb_->sortByPESEL();
+    std::cout << "Enter index: ";
+    int index;
+    std::cin >> index;
+    ptrToDb_->removeByIndex(index);
 }

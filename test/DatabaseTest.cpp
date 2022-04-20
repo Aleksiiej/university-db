@@ -109,7 +109,7 @@ TEST_F(DatabaseFixture, sortByPESELTest)
 
 TEST_F(DatabaseFixture, removeTest)
 {
-    database.remove(217025);
+    database.removeByIndex(217025);
 
     EXPECT_EQ(testStudentName, database.getPtrToRecord(0)->getName());
     EXPECT_EQ(testStudentSurname, database.getPtrToRecord(0)->getSurname());

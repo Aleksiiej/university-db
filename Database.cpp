@@ -99,7 +99,7 @@ void Database::sortBySalary()
               { return lhs->getSalary() < rhs->getSalary(); });
 }
 
-void Database::remove(const int &index)
+void Database::removeByIndex(const int &index)
 {
     database_.erase(std::find_if(begin(database_), end(database_), [&index](const auto el)
                                  { return el->getIndex() == index; }));

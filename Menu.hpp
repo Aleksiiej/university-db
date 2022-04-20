@@ -16,8 +16,8 @@ public:
     void enterData() const noexcept;
     void findRecordBySurname() const noexcept;
     void findRecordByPESEL() const noexcept;
-    void sortRecordsBySurname() const noexcept;
-    void sortRecordsByPESEL() const noexcept;
+    void removeRecordByIndex() const noexcept;
+
     void setPtrToDatabase(std::unique_ptr<Database> ptrToDb) noexcept;
 
 private:

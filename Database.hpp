@@ -25,7 +25,7 @@ public:
     void sortBySurname();                                                                                                                                                                      // sorts records by surnames
     void sortByPESEL();
     void sortBySalary();                                                 // sorts records by PESEL
-    void remove(const int &index);                                       // removes record with given index
+    void removeByIndex(const int &index);                                       // removes record with given index
     void modifySalary(const std::string &PESEL, const float &newSalary); // modyfies salary in record with given PESEL
     bool validatePESEL(const std::string &PESEL) const;                  // validates given PESEL
     void loadFromFile(const std::string &fileName = "../database.txt");  // load records from .txt file to vector database_
