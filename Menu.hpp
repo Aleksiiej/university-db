@@ -18,6 +18,8 @@ public:
     void findRecordByPESEL() const noexcept;
     void removeRecordByIndex() const noexcept;
     void modifySalary() const noexcept;
+    void validatePESEL() const noexcept;
+    void generateRandomRecords() const noexcept;
 
     void setPtrToDatabase(std::unique_ptr<Database> ptrToDb) noexcept;
 

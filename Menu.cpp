@@ -57,15 +57,19 @@ void Menu::run() noexcept
             break;
 
         case 10:
+            validatePESEL();
             break;
 
         case 11:
+            ptrToDb_->loadFromFile();
             break;
 
         case 12:
+            ptrToDb_->saveToFile();
             break;
 
         case 13:
+            generateRandomRecords();
             break;
 
         case 14:
@@ -229,3 +233,23 @@ void Menu::modifySalary() const noexcept
     }
 }
 
+void Menu::validatePESEL() const noexcept
+{
+    std::cout << "Enter PESEL: ";
+    std::string tempPESEL;
+    std::cin >> tempPESEL;
+    ptrToDb_->validatePESEL(tempPESEL);
+    std::cout << "Press enter to proceed";
+    std::getchar();
+}
+
+void Menu::generateRandomRecords() const noexcept
+{
+    std::cout << "Enter how many records should be generated(0-100): ";
+    int tempNumber;
+    std::cin >> tempNumber;
+    if (tempNumber >= 0 || tempNumber <= 100)
+    {
+        ptrToDb_->generateData(tempNumber);
+    }
+}
