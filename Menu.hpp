@@ -17,6 +17,7 @@ public:
     void findRecordBySurname() const noexcept;
     void findRecordByPESEL() const noexcept;
     void removeRecordByIndex() const noexcept;
+    void modifySalary() const noexcept;
 
     void setPtrToDatabase(std::unique_ptr<Database> ptrToDb) noexcept;
 
