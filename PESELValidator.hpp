@@ -8,10 +8,10 @@
 class PESELValidator
 {
 public:
-    bool validatePESEL(const std::string &PESEL) const;
+    bool validatePESEL(const std::string &PESEL) const noexcept;
 
 private:
-    bool validatePESELSize(const std::string &PESEL) const;
-    bool validatePESELDate(const std::string &PESEL) const;
-    bool validateControlNumber(const std::string &PESEL) const;
+    bool validatePESELSize(const std::string &PESEL) const noexcept;
+    bool validatePESELDate(const std::string &PESEL) const noexcept;
+    bool validateControlNumber(const std::string &PESEL) const noexcept;
 };

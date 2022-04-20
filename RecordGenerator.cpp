@@ -1,6 +1,6 @@
 #include "RecordGenerator.hpp"
 
-std::unique_ptr<Person> RecordGenerator::generateRandomRecord() const
+std::unique_ptr<Person> RecordGenerator::generateRandomRecord() const noexcept
 {
     std::random_device rd;
     std::mt19937 rng(rd());
@@ -41,7 +41,7 @@ std::unique_ptr<Person> RecordGenerator::generateRandomRecord() const
     return tempPtr;
 }
 
-std::string RecordGenerator::generateRandomMaleName() const
+std::string RecordGenerator::generateRandomMaleName() const noexcept
 {
     std::fstream file("../RandomData/maleNames.txt", std::ios::in);
     if (!file)
@@ -62,7 +62,7 @@ std::string RecordGenerator::generateRandomMaleName() const
     return tempName;
 }
 
-std::string RecordGenerator::generateRandomFemaleName() const
+std::string RecordGenerator::generateRandomFemaleName() const noexcept
 {
     std::fstream file("../RandomData/femaleNames.txt", std::ios::in);
     if (!file)
@@ -82,7 +82,7 @@ std::string RecordGenerator::generateRandomFemaleName() const
     return tempName;
 }
 
-std::string RecordGenerator::generateRandomMaleSurname() const
+std::string RecordGenerator::generateRandomMaleSurname() const noexcept
 {
     std::fstream file("../RandomData/maleSurnames.txt", std::ios::in);
     if (!file)
@@ -102,7 +102,7 @@ std::string RecordGenerator::generateRandomMaleSurname() const
     return tempSurname;
 }
 
-std::string RecordGenerator::generateRandomFemaleSurname() const
+std::string RecordGenerator::generateRandomFemaleSurname() const noexcept
 {
     std::fstream file("../RandomData/femaleSurnames.txt", std::ios::in);
     if (!file)
@@ -122,7 +122,7 @@ std::string RecordGenerator::generateRandomFemaleSurname() const
     return tempSurname;
 }
 
-std::string RecordGenerator::generateRandomAdress() const
+std::string RecordGenerator::generateRandomAdress() const noexcept
 {
     std::fstream file("../RandomData/adresses.txt", std::ios::in);
     if (!file)
@@ -142,7 +142,7 @@ std::string RecordGenerator::generateRandomAdress() const
     return tempAdress;
 }
 
-int RecordGenerator::generateRandomIndex() const
+int RecordGenerator::generateRandomIndex() const noexcept
 {
     std::random_device rd;
     std::mt19937 rng(rd());
@@ -150,7 +150,7 @@ int RecordGenerator::generateRandomIndex() const
     return distrib(rng);
 }
 
-float RecordGenerator::generateRandomSalary() const
+float RecordGenerator::generateRandomSalary() const noexcept
 {
     std::random_device rd;
     std::mt19937 rng(rd());
@@ -158,7 +158,7 @@ float RecordGenerator::generateRandomSalary() const
     return distrib(rng);
 }
 
-std::string RecordGenerator::generateRandomPESEL(const Sex &sex) const
+std::string RecordGenerator::generateRandomPESEL(const Sex &sex) const noexcept
 {
     std::string tempPESEL;
     tempPESEL = generatePESELDate(tempPESEL);          // Date
@@ -167,7 +167,7 @@ std::string RecordGenerator::generateRandomPESEL(const Sex &sex) const
     return tempPESEL;
 }
 
-std::string RecordGenerator::generatePESELDate(std::string &tempPESEL) const
+std::string RecordGenerator::generatePESELDate(std::string &tempPESEL) const noexcept
 {
     std::random_device rd;
     std::mt19937 rng(rd());
@@ -237,7 +237,7 @@ std::string RecordGenerator::generatePESELDate(std::string &tempPESEL) const
     return tempPESEL;
 }
 
-std::string RecordGenerator::generatePESELSex(std::string &tempPESEL, const Sex &sex) const
+std::string RecordGenerator::generatePESELSex(std::string &tempPESEL, const Sex &sex) const noexcept
 {
     std::random_device rd;
     std::mt19937 rng(rd());
@@ -270,7 +270,7 @@ std::string RecordGenerator::generatePESELSex(std::string &tempPESEL, const Sex 
     return tempPESEL;
 }
 
-std::string RecordGenerator::generatePESELControlNumber(std::string &tempPESEL) const
+std::string RecordGenerator::generatePESELControlNumber(std::string &tempPESEL) const noexcept
 {
     std::vector<int> weights{1, 3, 7, 9, 1, 3, 7, 9, 1, 3};
     std::transform(begin(weights), end(weights), begin(tempPESEL), begin(weights),

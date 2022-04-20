@@ -13,24 +13,24 @@ public:
     virtual ~Student() = default;
 
     // getters
-    std::string getName() const override;
-    std::string getSurname() const override;
-    std::string getAdress() const override;
-    Position getPosition() const override;
-    int getIndex() const override;
-    float getSalary() const override;
-    std::string getPESEL() const override;
-    Sex getSex() const override;
+    std::string getName() const noexcept override;
+    std::string getSurname() const noexcept override;
+    std::string getAdress() const noexcept override;
+    Position getPosition() const noexcept override;
+    int getIndex() const noexcept override;
+    float getSalary() const noexcept override;
+    std::string getPESEL() const noexcept override;
+    Sex getSex() const noexcept override;
 
     // setters
-    void setName(const std::string &name) override;
-    void setSurname(const std::string &surname) override;
-    void setAdress(const std::string &adress) override;
-    void setPosition(const Position &position) override;
-    void setIndex(const int &index);
-    void setSalary(const float &) override;
-    void setPESEL(const std::string &PESEL) override;
-    void setSex(const Sex &sex) override;
+    void setName(const std::string &name) noexcept override;
+    void setSurname(const std::string &surname) noexcept override;
+    void setAdress(const std::string &adress) noexcept override;
+    void setPosition(const Position &position) noexcept override;
+    void setIndex(const int &index) noexcept override;
+    void setSalary(const float &) noexcept override;
+    void setPESEL(const std::string &PESEL) noexcept override;
+    void setSex(const Sex &sex) noexcept override;
 
 private:
     int index_;

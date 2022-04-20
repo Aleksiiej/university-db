@@ -1,23 +1,23 @@
 #include "Database.hpp"
 
-void Database::addStudent(const std::string &name, const std::string &surname, const std::string &adress, const int &index, const std::string &PESEL, const Sex &sex, const Position &position)
+void Database::addStudent(const std::string &name, const std::string &surname, const std::string &adress, const int &index, const std::string &PESEL, const Sex &sex, const Position &position) noexcept
 {
     database_.push_back(std::make_shared<Student>(Student{name, surname, adress, index, PESEL, sex, position}));
 }
 
-void Database::addEmployee(const std::string &name, const std::string &surname, const std::string &adress, const float &salary, const std::string &PESEL, const Sex &sex, const Position &position)
+void Database::addEmployee(const std::string &name, const std::string &surname, const std::string &adress, const float &salary, const std::string &PESEL, const Sex &sex, const Position &position) noexcept
 {
     database_.push_back(std::make_shared<Employee>(Employee{name, surname, adress, salary, PESEL, sex, position}));
 }
 
-void Database::show() const
+void Database::show() const noexcept
 {
     system("clear");
     std::for_each(begin(database_), end(database_), [this](const auto ptr)
                   { printByPtr(ptr); });
 }
 
-void Database::printByPtr(const std::shared_ptr<Person> ptr) const
+void Database::printByPtr(const std::shared_ptr<Person> ptr) const noexcept
 {
     std::cout << "===================================" << std::endl;
     std::cout << "Name: " << ptr->getName() << std::endl;
@@ -38,7 +38,7 @@ void Database::printByPtr(const std::shared_ptr<Person> ptr) const
     std::cout << "===================================" << std::endl;
 }
 
-void Database::showBySurname(const std::string &surname) const
+void Database::showBySurname(const std::string &surname) const noexcept
 {
     system("clear");
     auto tempVec = findBySurname(surname);
@@ -50,14 +50,14 @@ void Database::showBySurname(const std::string &surname) const
                   { printByPtr(ptr); });
 }
 
-void Database::showByPESEL(const std::string &PESEL) const
+void Database::showByPESEL(const std::string &PESEL) const noexcept
 {
     system("clear");
     auto ptr = findByPESEL(PESEL);
     printByPtr(ptr);
 }
 
-std::vector<std::shared_ptr<Person>> Database::findBySurname(const std::string &surname) const
+std::vector<std::shared_ptr<Person>> Database::findBySurname(const std::string &surname) const noexcept
 {
     std::vector<std::shared_ptr<Person>> tempVec;
     for (const auto &el : database_)
@@ -71,7 +71,7 @@ std::vector<std::shared_ptr<Person>> Database::findBySurname(const std::string &
     return tempVec;
 }
 
-std::shared_ptr<Person> Database::findByPESEL(const std::string &PESEL) const
+std::shared_ptr<Person> Database::findByPESEL(const std::string &PESEL) const noexcept
 {
     auto tempIter = std::find_if(begin(database_), end(database_), [&PESEL](const auto el)
                                  { return el->getPESEL() == PESEL; });
@@ -85,25 +85,25 @@ std::shared_ptr<Person> Database::findByPESEL(const std::string &PESEL) const
     }
 }
 
-void Database::sortBySurname()
+void Database::sortBySurname() noexcept
 {
     std::sort(begin(database_), end(database_), [](auto lhs, auto rhs)
               { return lhs->getSurname() < rhs->getSurname(); });
 }
 
-void Database::sortByPESEL()
+void Database::sortByPESEL() noexcept
 {
     std::sort(begin(database_), end(database_), [](auto lhs, auto rhs)
               { return lhs->getPESEL() < rhs->getPESEL(); });
 }
 
-void Database::sortBySalary()
+void Database::sortBySalary() noexcept
 {
     std::sort(begin(database_), end(database_), [](auto lhs, auto rhs)
               { return lhs->getSalary() < rhs->getSalary(); });
 }
 
-void Database::removeByIndex(const int &index)
+void Database::removeByIndex(const int &index) noexcept
 {
     if (database_.size() == 0)
     {
@@ -116,7 +116,7 @@ void Database::removeByIndex(const int &index)
                                  { return el->getIndex() == index; }));
 }
 
-void Database::modifySalary(const std::string &PESEL, const float &newSalary)
+void Database::modifySalary(const std::string &PESEL, const float &newSalary) noexcept
 {
     system("clear");
     std::shared_ptr<Person> tempPtr = findByPESEL(PESEL);
@@ -128,13 +128,13 @@ void Database::modifySalary(const std::string &PESEL, const float &newSalary)
     std::getchar();
 }
 
-bool Database::validatePESEL(const std::string &PESEL) const
+bool Database::validatePESEL(const std::string &PESEL) const noexcept
 {
     auto tempValidator = std::make_unique<PESELValidator>();
     return tempValidator->validatePESEL(PESEL);
 }
 
-void Database::loadFromFile(const std::string &fileName)
+void Database::loadFromFile(const std::string &fileName) noexcept
 {
     database_.clear();
 
@@ -195,7 +195,7 @@ void Database::loadFromFile(const std::string &fileName)
     }
 }
 
-void Database::saveToFile(const std::string &fileName)
+void Database::saveToFile(const std::string &fileName) noexcept
 {
     std::fstream file(fileName, std::ios::out);
 
@@ -233,7 +233,7 @@ void Database::saveToFile(const std::string &fileName)
     }
 }
 
-void Database::generateData(const int &n)
+void Database::generateData(const int &n) noexcept
 {
     auto tempGenerator = std::make_unique<RecordGenerator>();
     for (int i = 0; i < n; i++)
@@ -242,7 +242,7 @@ void Database::generateData(const int &n)
     }
 }
 
-std::shared_ptr<Person> Database::getPtrToRecord(const int &pos) const
+std::shared_ptr<Person> Database::getPtrToRecord(const int &pos) const noexcept
 {
     return database_.at(pos);
 }

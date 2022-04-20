@@ -244,7 +244,7 @@ void Menu::validatePESEL() const noexcept
 
 void Menu::generateRandomRecords() const noexcept
 {
-    std::cout << "Enter how many records should be generated(0-100): ";
+    std::cout << "Enter how many records have to be generated(0-100): ";
     int tempNumber;
     std::cin >> tempNumber;
     if (tempNumber >= 0 || tempNumber <= 100)

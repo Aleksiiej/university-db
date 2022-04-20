@@ -19,18 +19,18 @@ constexpr int maxYearOfBirth = 1999;
 class RecordGenerator
 {
 public:
-    std::unique_ptr<Person> generateRandomRecord() const;
+    std::unique_ptr<Person> generateRandomRecord() const noexcept;
 
 private:
-    std::string generateRandomMaleName() const;
-    std::string generateRandomFemaleName() const;
-    std::string generateRandomMaleSurname() const;
-    std::string generateRandomFemaleSurname() const;
-    std::string generateRandomAdress() const;
-    int generateRandomIndex() const;
-    float generateRandomSalary() const;
-    std::string generateRandomPESEL(const Sex& sex) const;
-    std::string generatePESELDate(std::string& tempPESEL) const;
-    std::string generatePESELSex(std::string& tempPESEL, const Sex& sex) const;
-    std::string generatePESELControlNumber(std::string& tempPESEL) const;
+    std::string generateRandomMaleName() const noexcept;
+    std::string generateRandomFemaleName() const noexcept;
+    std::string generateRandomMaleSurname() const noexcept;
+    std::string generateRandomFemaleSurname() const noexcept;
+    std::string generateRandomAdress() const noexcept;
+    int generateRandomIndex() const noexcept;
+    float generateRandomSalary() const noexcept;
+    std::string generateRandomPESEL(const Sex& sex) const noexcept;
+    std::string generatePESELDate(std::string& tempPESEL) const noexcept;
+    std::string generatePESELSex(std::string& tempPESEL, const Sex& sex) const noexcept;
+    std::string generatePESELControlNumber(std::string& tempPESEL) const noexcept;
 };

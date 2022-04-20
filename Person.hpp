@@ -25,24 +25,24 @@ public:
     virtual ~Person() = default;
 
     // getters
-    virtual std::string getName() const;
-    virtual std::string getSurname() const;
-    virtual std::string getAdress() const;
-    virtual Position getPosition() const;
-    virtual int getIndex() const;
-    virtual float getSalary() const;
-    virtual std::string getPESEL() const;
-    virtual Sex getSex() const;
+    virtual std::string getName() const noexcept;
+    virtual std::string getSurname() const noexcept;
+    virtual std::string getAdress() const noexcept;
+    virtual Position getPosition() const noexcept;
+    virtual int getIndex() const noexcept;
+    virtual float getSalary() const noexcept;
+    virtual std::string getPESEL() const noexcept;
+    virtual Sex getSex() const noexcept;
 
     // setters
-    virtual void setName(const std::string &name);
-    virtual void setSurname(const std::string &surname);
-    virtual void setAdress(const std::string &adress);
-    virtual void setPosition(const Position &position);
-    virtual void setIndex(const int &index);
-    virtual void setSalary(const float &salary);
-    virtual void setPESEL(const std::string &PESEL);
-    virtual void setSex(const Sex &sex);
+    virtual void setName(const std::string &name) noexcept;
+    virtual void setSurname(const std::string &surname) noexcept;
+    virtual void setAdress(const std::string &adress) noexcept;
+    virtual void setPosition(const Position &position) noexcept;
+    virtual void setIndex(const int &index) noexcept;
+    virtual void setSalary(const float &salary) noexcept;
+    virtual void setPESEL(const std::string &PESEL) noexcept;
+    virtual void setSex(const Sex &sex) noexcept;
 
     std::map<Sex, std::string> sexPrint{{Sex::male, "male"}, {Sex::female, "female"}};
     std::map<Position, std::string> positionPrint{{Position::Student, "Student"}, {Position::Employee, "Employee"}};
