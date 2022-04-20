@@ -33,6 +33,7 @@ void Menu::run() noexcept
             break;
 
         case 4:
+            findRecordByPESEL();
             break;
 
         case 5:
@@ -174,4 +175,22 @@ void Menu::findRecordBySurname() noexcept
     std::cin.ignore(1000, '\n');
     std::getline(std::cin, tempSurname);
     ptrToDb_->showBySurname(tempSurname);
+}
+
+void Menu::findRecordByPESEL() const noexcept
+{
+    std::cout << "Enter PESEL: ";
+    std::string tempPESEL;
+    std::cin.clear();
+    std::cin.ignore(1000, '\n');
+    std::getline(std::cin, tempPESEL);
+    if (ptrToDb_->findByPESEL(tempPESEL) == nullptr)
+    {
+        std::cout << "No records with given PESEL number found. Press enter to proceed...";
+    }
+    else
+    {
+        ptrToDb_->showByPESEL(tempPESEL);
+        std::cout << "Press enter to proceed...";
+    }
 }
