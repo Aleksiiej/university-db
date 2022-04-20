@@ -14,7 +14,7 @@ public:
     void run() noexcept;
     void showMenu() const noexcept;
     void enterData() const noexcept;
-    void findRecordBySurname();
+    void findRecordBySurname() noexcept;
     void setPtrToDatabase(std::unique_ptr<Database> ptrToDb) noexcept;
 
 private:

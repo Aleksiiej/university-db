@@ -30,7 +30,6 @@ void Menu::run() noexcept
         case 3:
             findRecordBySurname();
             std::cout << "Press enter to proceed...";
-            std::getchar();
             break;
 
         case 4:
@@ -66,8 +65,7 @@ void Menu::run() noexcept
         case 14:
             exit(0);
 
-        default:
-            break;
+        default:;
         }
         std::cin.clear();
         std::cin.ignore(1000, '\n');
@@ -168,7 +166,7 @@ void Menu::enterData() const noexcept
     }
 }
 
-void Menu::findRecordBySurname()
+void Menu::findRecordBySurname() noexcept
 {
     std::cout << "Enter surname: ";
     std::string tempSurname;
