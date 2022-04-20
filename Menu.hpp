@@ -11,7 +11,7 @@ public:
     Menu(Database &db) : ptrToDb_(&db)
     {
     }
-    void run() noexcept;
+    void run() const noexcept;
     void showMenu() const noexcept;
     void enterData() const noexcept;
     void findRecordBySurname() const noexcept;

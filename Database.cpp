@@ -42,6 +42,10 @@ void Database::showBySurname(const std::string &surname) const
 {
     system("clear");
     auto tempVec = findBySurname(surname);
+    if (tempVec.size() == 0)
+    {
+        std::cout << "No records with given surname found" << std::endl;
+    }
     std::for_each(begin(tempVec), end(tempVec), [this](const auto ptr)
                   { printByPtr(ptr); });
 }
@@ -101,6 +105,13 @@ void Database::sortBySalary()
 
 void Database::removeByIndex(const int &index)
 {
+    if (database_.size() == 0)
+    {
+        std::cout << "No records in database" << std::endl;
+        std::cout << "Press enter to proceed...";
+        std::getchar();
+        return;
+    }
     database_.erase(std::find_if(begin(database_), end(database_), [&index](const auto el)
                                  { return el->getIndex() == index; }));
 }

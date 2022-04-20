@@ -5,9 +5,8 @@ void Menu::setPtrToDatabase(std::unique_ptr<Database> ptrToDb) noexcept
     ptrToDb_ = std::move(ptrToDb);
 }
 
-void Menu::run() noexcept
+void Menu::run() const noexcept
 {
-
     int choose;
 
     while (true)
@@ -149,7 +148,7 @@ void Menu::enterData() const noexcept
     std::cin >> PESEL;
     while (ptrToDb_->validatePESEL(PESEL) == false)
     {
-        std::cout << "Invalid PESEL number. Enter correct PESEL number: ";
+        std::cout << "Enter correct PESEL number: ";
         std::cin >> PESEL;
     }
 
@@ -239,7 +238,7 @@ void Menu::validatePESEL() const noexcept
     std::string tempPESEL;
     std::cin >> tempPESEL;
     ptrToDb_->validatePESEL(tempPESEL);
-    std::cout << "Press enter to proceed";
+    std::cout << "Press enter to proceed...";
     std::getchar();
 }
 
