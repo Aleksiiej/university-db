@@ -5,7 +5,7 @@ void Menu::setPtrToDatabase(std::unique_ptr<Database> ptrToDb) noexcept
     ptrToDb_ = std::move(ptrToDb);
 }
 
-void Menu::run() const noexcept
+void Menu::run() noexcept
 {
 
     int choose;
@@ -28,6 +28,9 @@ void Menu::run() const noexcept
             break;
 
         case 3:
+            findRecordBySurname();
+            std::cout << "Press enter to proceed...";
+            std::getchar();
             break;
 
         case 4:
@@ -97,12 +100,14 @@ void Menu::enterData() const noexcept
     std::string name;
     std::string surname;
     std::string adress;
+    std::string tempPosition;
     int position;
     int index;
     float salary;
     std::string PESEL;
+    std::string tempSex;
     int sex;
-    
+
     system("clear");
 
     std::cin.clear();
@@ -117,24 +122,39 @@ void Menu::enterData() const noexcept
     std::cout << "Enter adress: ";
     std::getline(std::cin, adress);
 
-    std::cout << "Enter position: type 0 if student, 1 if employee: ";
-    std::cin >> position;
-    if (position == 0)
+    std::cout << "Enter position: type 0 if student, any other button if employee: ";
+    std::getline(std::cin, tempPosition);
+    if (tempPosition == "0")
     {
+        position = 0;
         std::cout << "Enter index: ";
         std::cin >> index;
     }
-    else if (position == 1)
+    else
     {
+        position = 1;
         std::cout << "Enter salary: ";
-        std::cin >> index;
+        std::cin >> salary;
     }
 
     std::cout << "Enter PESEL: ";
     std::cin >> PESEL;
+    while (ptrToDb_->validatePESEL(PESEL) == false)
+    {
+        std::cout << "Invalid PESEL number. Enter correct PESEL number: ";
+        std::cin >> PESEL;
+    }
 
-    std::cout << "Enter sex: type 0 if male, 1 if female: ";
-    std::cin >> sex;
+    std::cout << "Enter sex: type 0 if male, any other button if female: ";
+    std::cin >> tempSex;
+    if (tempSex == "0")
+    {
+        sex = 0;
+    }
+    else
+    {
+        sex = 1;
+    }
 
     switch (position)
     {
@@ -143,7 +163,17 @@ void Menu::enterData() const noexcept
         break;
 
     case 1:
-        ptrToDb_->addEmployee(name, surname, adress, salary, PESEL, static_cast<Sex>(sex), Position::Student);
+        ptrToDb_->addEmployee(name, surname, adress, salary, PESEL, static_cast<Sex>(sex), Position::Employee);
         break;
     }
+}
+
+void Menu::findRecordBySurname()
+{
+    std::cout << "Enter surname: ";
+    std::string tempSurname;
+    std::cin.clear();
+    std::cin.ignore(1000, '\n');
+    std::getline(std::cin, tempSurname);
+    ptrToDb_->showBySurname(tempSurname);
 }

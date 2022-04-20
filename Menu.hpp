@@ -11,9 +11,10 @@ public:
     Menu(Database &db) : ptrToDb_(&db)
     {
     }
-    void run() const noexcept;
+    void run() noexcept;
     void showMenu() const noexcept;
     void enterData() const noexcept;
+    void findRecordBySurname();
     void setPtrToDatabase(std::unique_ptr<Database> ptrToDb) noexcept;
 
 private:
