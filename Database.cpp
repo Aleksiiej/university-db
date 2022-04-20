@@ -69,9 +69,6 @@ std::vector<std::shared_ptr<Person>> Database::findBySurname(const std::string &
 
 std::shared_ptr<Person> Database::findByPESEL(const std::string &PESEL) const
 {
-
-    // auto tempPtr = *(std::find_if(begin(database_), end(database_), [&PESEL](const auto el)
-    //                               { return el->getPESEL() == PESEL; }));
     auto tempIter = std::find_if(begin(database_), end(database_), [&PESEL](const auto el)
                                  { return el->getPESEL() == PESEL; });
     if (tempIter != end(database_))

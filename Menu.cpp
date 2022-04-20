@@ -37,9 +37,11 @@ void Menu::run() noexcept
             break;
 
         case 5:
+            sortRecordsBySurname();
             break;
 
         case 6:
+            sortRecordsByPESEL();
             break;
 
         case 7:
@@ -167,7 +169,7 @@ void Menu::enterData() const noexcept
     }
 }
 
-void Menu::findRecordBySurname() noexcept
+void Menu::findRecordBySurname() const noexcept
 {
     std::cout << "Enter surname: ";
     std::string tempSurname;
@@ -193,4 +195,14 @@ void Menu::findRecordByPESEL() const noexcept
         ptrToDb_->showByPESEL(tempPESEL);
         std::cout << "Press enter to proceed...";
     }
+}
+
+void Menu::sortRecordsBySurname() const noexcept
+{
+    ptrToDb_->sortBySurname();
+}
+
+void Menu::sortRecordsByPESEL() const noexcept
+{
+    ptrToDb_->sortByPESEL();
 }
