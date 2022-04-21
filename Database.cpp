@@ -46,15 +46,25 @@ void Database::showBySurname(const std::string &surname) const noexcept
     {
         std::cout << "No records with given surname found" << std::endl;
     }
-    std::for_each(begin(tempVec), end(tempVec), [this](const auto ptr)
-                  { printByPtr(ptr); });
+    else
+    {
+        std::for_each(begin(tempVec), end(tempVec), [this](const auto ptr)
+                      { printByPtr(ptr); });
+    }
 }
 
 void Database::showByPESEL(const std::string &PESEL) const noexcept
 {
     system("clear");
     auto ptr = findByPESEL(PESEL);
-    printByPtr(ptr);
+    if (ptr == nullptr)
+    {
+        std::cout << "No records with given surname found" << std::endl;
+    }
+    else
+    {
+        printByPtr(ptr);
+    }
 }
 
 std::vector<std::shared_ptr<Person>> Database::findBySurname(const std::string &surname) const noexcept
@@ -120,12 +130,20 @@ void Database::modifySalary(const std::string &PESEL, const float &newSalary) no
 {
     system("clear");
     std::shared_ptr<Person> tempPtr = findByPESEL(PESEL);
-    tempPtr->setSalary(newSalary);
-    printByPtr(tempPtr);
-    std::cout << "New salary set at value: " << std::fixed << std::setprecision(2) << tempPtr->getSalary() << std::endl;
-    std::cout << "Press any button to proceed...";
-    std::getchar();
-    std::getchar();
+    if (tempPtr != nullptr && tempPtr->getPosition() == Position::Employee && database_.size() != 0)
+    {
+        tempPtr->setSalary(newSalary);
+        printByPtr(tempPtr);
+        std::cout << "New salary set at value: " << std::fixed << std::setprecision(2) << tempPtr->getSalary() << std::endl;
+        std::cout << "Press any button to proceed...";
+        std::getchar();
+    }
+    else
+    {
+        std::cout << "No employee records with given PESEL found" << std::endl;
+        std::cout << "Press any button to proceed...";
+        std::getchar();
+    }
 }
 
 bool Database::validatePESEL(const std::string &PESEL) const noexcept

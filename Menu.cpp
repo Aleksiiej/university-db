@@ -33,6 +33,7 @@ void Menu::run() const noexcept
 
         case 4:
             findRecordByPESEL();
+            std::cout << "Press enter to proceed...";
             break;
 
         case 5:
@@ -192,15 +193,7 @@ void Menu::findRecordByPESEL() const noexcept
     std::cin.clear();
     std::cin.ignore(1000, '\n');
     std::getline(std::cin, tempPESEL);
-    if (ptrToDb_->findByPESEL(tempPESEL) == nullptr)
-    {
-        std::cout << "No records with given PESEL number found. Press enter to proceed...";
-    }
-    else
-    {
-        ptrToDb_->showByPESEL(tempPESEL);
-        std::cout << "Press enter to proceed...";
-    }
+    ptrToDb_->showByPESEL(tempPESEL);
 }
 
 void Menu::removeRecordByIndex() const noexcept
@@ -218,18 +211,10 @@ void Menu::modifySalary() const noexcept
     std::cin.clear();
     std::cin.ignore(1000, '\n');
     std::getline(std::cin, tempPESEL);
-    auto tempPtr = ptrToDb_->findByPESEL(tempPESEL);
-    if (tempPtr == nullptr)
-    {
-        std::cout << "No employee records with given PESEL number found. Press enter to proceed...";
-    }
-    else
-    {
-        std::cout << "Enter new salary: ";
-        int tempSalary;
-        std::cin >> tempSalary;
-        tempPtr->setSalary(tempSalary);
-    }
+    std::cout << "Enter new salary: ";
+    int tempSalary;
+    std::cin >> tempSalary;
+    ptrToDb_->modifySalary(tempPESEL, tempSalary);
 }
 
 void Menu::validatePESEL() const noexcept

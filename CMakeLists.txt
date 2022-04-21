@@ -38,6 +38,6 @@ target_compile_options(${PROJECT_NAME} PUBLIC -Wall -Wpedantic -Wextra -Werror)
 
 enable_testing()
 include(GoogleTest)
-add_executable(${PROJECT_NAME}-ut ${SRC_LIST_UT} test/DatabaseTest.cpp)
+add_executable(${PROJECT_NAME}-ut ${SRC_LIST_UT} gtest/DatabaseTest.cpp)
 target_link_libraries(${PROJECT_NAME}-ut gtest_main)
 add_test(NAME tests COMMAND ${PROJECT_NAME}-ut)
