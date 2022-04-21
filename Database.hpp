@@ -25,8 +25,8 @@ public:
     void sortBySurname() noexcept;
     void sortByPESEL() noexcept;
     void sortBySalary() noexcept;
-    void removeByIndex(const int &index) noexcept;
-    void modifySalary(const std::string &PESEL, const float &newSalary) noexcept;
+    bool removeByIndex(const int &index) noexcept;
+    bool modifySalary(const std::string &PESEL, const float &newSalary) noexcept;
     bool validatePESEL(const std::string &PESEL) const noexcept;
     void loadFromFile(const std::string &fileName = "../database.txt") noexcept;
     void saveToFile(const std::string &fileName = "../database.txt") noexcept;

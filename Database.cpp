@@ -59,7 +59,7 @@ void Database::showByPESEL(const std::string &PESEL) const noexcept
     auto ptr = findByPESEL(PESEL);
     if (ptr == nullptr)
     {
-        std::cout << "No records with given surname found" << std::endl;
+        std::cout << "No records with given PESEL found" << std::endl;
     }
     else
     {
@@ -113,36 +113,31 @@ void Database::sortBySalary() noexcept
               { return lhs->getSalary() < rhs->getSalary(); });
 }
 
-void Database::removeByIndex(const int &index) noexcept
+bool Database::removeByIndex(const int &index) noexcept
 {
     if (database_.size() == 0)
     {
         std::cout << "No records in database" << std::endl;
-        std::cout << "Press enter to proceed...";
-        std::getchar();
-        return;
+        return false;
     }
     database_.erase(std::find_if(begin(database_), end(database_), [&index](const auto el)
                                  { return el->getIndex() == index; }));
+    return true;
 }
 
-void Database::modifySalary(const std::string &PESEL, const float &newSalary) noexcept
+bool Database::modifySalary(const std::string &PESEL, const float &newSalary) noexcept
 {
     system("clear");
     std::shared_ptr<Person> tempPtr = findByPESEL(PESEL);
-    if (tempPtr != nullptr && tempPtr->getPosition() == Position::Employee && database_.size() != 0)
+    if (tempPtr != nullptr && tempPtr->getPosition() == Position::Employee)
     {
         tempPtr->setSalary(newSalary);
         printByPtr(tempPtr);
-        std::cout << "New salary set at value: " << std::fixed << std::setprecision(2) << tempPtr->getSalary() << std::endl;
-        std::cout << "Press any button to proceed...";
-        std::getchar();
+        return true;
     }
     else
     {
-        std::cout << "No employee records with given PESEL found" << std::endl;
-        std::cout << "Press any button to proceed...";
-        std::getchar();
+        return false;
     }
 }
 
