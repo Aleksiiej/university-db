@@ -224,13 +224,13 @@ void Menu::modifySalary() const noexcept
     if (value == true)
     {
         std::cout << "New salary set at value: " << std::fixed << std::setprecision(2) << tempSalary << std::endl;
-        std::cout << "Press any button to proceed...";
+        std::cout << "Press enter to proceed...";
         std::getchar();
     }
     else if (value == false)
     {
         std::cout << "No employee records with given PESEL found" << std::endl;
-        std::cout << "Press any button to proceed...";
+        std::cout << "Press enter to proceed...";
         std::getchar();
     }
 }
