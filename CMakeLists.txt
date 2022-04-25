@@ -31,6 +31,10 @@ set(SRC_LIST_UT
     PESELValidator.cpp
     RecordGenerator.cpp
     Menu.cpp
+    ./gtest/DatabaseTest.cpp
+    ./gtest/MenuTest.cpp
+    ./gtest/PESELValidatorTest.cpp
+    ./gtest/RecordGeneratorTest.cpp    
 )
 
 add_executable(${PROJECT_NAME} ${SRC_LIST})
@@ -38,6 +42,6 @@ target_compile_options(${PROJECT_NAME} PUBLIC -Wall -Wpedantic -Wextra -Werror)
 
 enable_testing()
 include(GoogleTest)
-add_executable(${PROJECT_NAME}-ut ${SRC_LIST_UT} gtest/DatabaseTest.cpp gtest/PESELValidatorTest.cpp gtest/RecordGeneratorTest.cpp)
-target_link_libraries(${PROJECT_NAME}-ut gtest_main)
+add_executable(${PROJECT_NAME}-ut ${SRC_LIST_UT} )
+target_link_libraries(${PROJECT_NAME}-ut gtest_main gmock)
 add_test(NAME tests COMMAND ${PROJECT_NAME}-ut)
