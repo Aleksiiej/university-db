@@ -1,10 +1,5 @@
 #include "Menu.hpp"
 
-void Menu::setPtrToDatabase(std::unique_ptr<Database> ptrToDb) noexcept
-{
-    ptrToDb_ = std::move(ptrToDb);
-}
-
 void Menu::run() const noexcept
 {
     int choose;

@@ -35,14 +35,7 @@ public:
     virtual Sex getSex() const noexcept;
 
     // setters
-    virtual void setName(const std::string &name) noexcept;
-    virtual void setSurname(const std::string &surname) noexcept;
-    virtual void setAdress(const std::string &adress) noexcept;
-    virtual void setPosition(const Position &position) noexcept;
-    virtual void setIndex(const int &index) noexcept;
     virtual void setSalary(const float &salary) noexcept;
-    virtual void setPESEL(const std::string &PESEL) noexcept;
-    virtual void setSex(const Sex &sex) noexcept;
 
     std::map<Sex, std::string> sexPrint{{Sex::male, "male"}, {Sex::female, "female"}};
     std::map<Position, std::string> positionPrint{{Position::Student, "Student"}, {Position::Employee, "Employee"}};

@@ -22,14 +22,7 @@ public:
     Sex getSex() const noexcept override;
 
     // setters
-    void setName(const std::string &name) noexcept override;
-    void setSurname(const std::string &surname) noexcept override;
-    void setAdress(const std::string &adress) noexcept override;
-    void setPosition(const Position &position) noexcept override;
-    void setIndex(const int &) noexcept override;
     void setSalary(const float &salary) noexcept override;
-    void setPESEL(const std::string &PESEL) noexcept override;
-    void setSex(const Sex &sex) noexcept override;
 
 private:
     float salary_;

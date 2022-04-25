@@ -11,11 +11,4 @@ std::string Employee::getPESEL() const noexcept { return PESEL_; }
 Sex Employee::getSex() const noexcept { return sex_; }
 
 // setters
-void Employee::setName(const std::string &name) noexcept { name_ = name; }
-void Employee::setSurname(const std::string &surname) noexcept { surname_ = surname; }
-void Employee::setAdress(const std::string &adress) noexcept { adress_ = adress; }
-void Employee::setPosition(const Position &position) noexcept { position_ = position; }
-void Employee::setIndex(const int &) noexcept {}
 void Employee::setSalary(const float &salary) noexcept { salary_ = salary; }
-void Employee::setPESEL(const std::string &PESEL) noexcept { PESEL_ = PESEL; }
-void Employee::setSex(const Sex &sex) noexcept { sex_ = sex; }

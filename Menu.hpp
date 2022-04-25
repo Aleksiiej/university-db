@@ -1,14 +1,14 @@
 #pragma once
 #include <iostream>
 #include <memory>
+#include "IDatabase.hpp"
 #include "Database.hpp"
 #include "Person.hpp"
 
 class Menu
 {
 public:
-    Menu() = default;
-    Menu(Database &db) : ptrToDb_(&db)
+    Menu(IDatabase &db) : ptrToDb_(&db)
     {
     }
     void run() const noexcept;
@@ -21,8 +21,6 @@ public:
     void validatePESEL() const noexcept;
     void generateRandomRecords() const noexcept;
 
-    void setPtrToDatabase(std::unique_ptr<Database> ptrToDb) noexcept;
-
 private:
-    std::unique_ptr<Database> ptrToDb_;
+    std::unique_ptr<IDatabase> ptrToDb_;
 };
