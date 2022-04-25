@@ -20,7 +20,6 @@ set(SRC_LIST
     Employee.cpp
     PESELValidator.cpp
     RecordGenerator.cpp
-    FileLoaderSaver.cpp
     Menu.cpp
 )
 
@@ -39,6 +38,6 @@ target_compile_options(${PROJECT_NAME} PUBLIC -Wall -Wpedantic -Wextra -Werror)
 
 enable_testing()
 include(GoogleTest)
-add_executable(${PROJECT_NAME}-ut ${SRC_LIST_UT} gtest/DatabaseTest.cpp gtest/PESELValidatorTest.cpp)
+add_executable(${PROJECT_NAME}-ut ${SRC_LIST_UT} gtest/DatabaseTest.cpp gtest/PESELValidatorTest.cpp gtest/RecordGeneratorTest.cpp)
 target_link_libraries(${PROJECT_NAME}-ut gtest_main)
 add_test(NAME tests COMMAND ${PROJECT_NAME}-ut)
