@@ -91,9 +91,3 @@ TEST_F(DatabaseFixture, modifySalaryTest)
     database.modifySalary("78032559472", 1000);
     EXPECT_EQ(database.getPtrToRecord(4)->getSalary(), 1000);
 }
-
-TEST_F(DatabaseFixture, validatePESELTest)
-{
-    EXPECT_FALSE(database.validatePESEL(database.getPtrToRecord(0)->getPESEL()));
-    EXPECT_TRUE(database.validatePESEL("58052089564"));
-}

@@ -127,12 +127,11 @@ bool Database::removeByIndex(const int &index) noexcept
 
 bool Database::modifySalary(const std::string &PESEL, const float &newSalary) noexcept
 {
-    system("clear");
+
     std::shared_ptr<Person> tempPtr = findByPESEL(PESEL);
     if (tempPtr != nullptr && tempPtr->getPosition() == Position::Employee)
     {
         tempPtr->setSalary(newSalary);
-        printByPtr(tempPtr);
         return true;
     }
     else

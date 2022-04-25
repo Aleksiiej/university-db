@@ -218,12 +218,14 @@ void Menu::modifySalary() const noexcept
     bool value = ptrToDb_->modifySalary(tempPESEL, tempSalary);
     if (value == true)
     {
+        system("clear");
         std::cout << "New salary set at value: " << std::fixed << std::setprecision(2) << tempSalary << std::endl;
         std::cout << "Press enter to proceed...";
         std::getchar();
     }
     else if (value == false)
     {
+        system("clear");
         std::cout << "No employee records with given PESEL found" << std::endl;
         std::cout << "Press enter to proceed...";
         std::getchar();
