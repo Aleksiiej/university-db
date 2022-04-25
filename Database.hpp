@@ -5,13 +5,14 @@
 #include <memory>
 #include <fstream>
 #include <iomanip>
+#include "IDatabase.hpp"
 #include "Person.hpp"
 #include "Student.hpp"
 #include "Employee.hpp"
 #include "PESELValidator.hpp"
 #include "RecordGenerator.hpp"
 
-class Database
+class Database : public IDatabase
 {
 public:
     void addStudent(const std::string &name, const std::string &surname, const std::string &adress, const int &index, const std::string &PESEL, const Sex &sex, const Position &position) noexcept;
