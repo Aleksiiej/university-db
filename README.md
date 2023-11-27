@@ -14,7 +14,7 @@ This project involves creating a database management system for academic staff, 
 - Language: Modern C++ (11, 14, 17)
 - Testing Framework: Google Test (GTest)
 - Build System: CMake
-- Development Tool: Microsoft Visual Studio Code
+- Development Tool: Visual Studio Code
 - Platform: Linux
 
 ## Project Goals:
