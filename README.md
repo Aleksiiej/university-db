@@ -11,10 +11,10 @@ This project involves creating a database management system for academic staff, 
 - Data Management: Efficient handling of academic staff data, including storage, retrieval, and manipulation functionalities.
 
 ## Technical Stack:
-- Language: C++
+- Language: Modern C++ (11, 14, 17)
 - Testing Framework: Google Test (GTest)
 - Build System: CMake
-- Development Tool: Microsoft Visual Studio
+- Development Tool: Microsoft Visual Studio Code
 - Platform: Linux
 
 ## Project Goals:
