@@ -2,6 +2,8 @@
 ## Project Overview
 This project involves creating a database management system for academic staff, developed in C++ using object-oriented programming principles. The aim was to enhance my skills in developing complex software systems in C++. The project, optimized for Linux systems, showcases a blend of advanced C++ features, unit testing, and efficient data management techniques.
 
+![Screenshot from 2023-11-27 15-15-21](https://github.com/Aleksiiej/university-db/assets/94867075/904b4e28-5288-4c02-90da-e4b6f77c9140)
+
 ## Key Features:
 - Object-Oriented Design: The system is architected using C++ object-oriented programming, promoting modular, reusable, and maintainable code.
 - CMake Integration: Utilizes CMake for project build management, demonstrating proficiency in modern C++ development practices.
